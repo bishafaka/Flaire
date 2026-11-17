@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 [DefaultExecutionOrder(-25)]
 public class InputManager : MonoBehaviour
 {
-	// INPUT SYSTEM
+// INPUT SYSTEM
 	InputSystemActions Inputs;
 	public enum PlayerState
 	{
@@ -15,7 +15,7 @@ public class InputManager : MonoBehaviour
 	}
 	[SerializeField] PlayerState CurrentPlayerState=PlayerState.UI;
 
-	// INPUT EVENTS
+// INPUT EVENTS
 	public event Action<Vector2> Move;
 	public event Action<Vector2> Look;
 	public event Action JumpPressed;
@@ -23,7 +23,7 @@ public class InputManager : MonoBehaviour
 	public event Action SprintPressed;
 	public event Action SprintReleased;
 
-	// EVENT SUBSCRIPTION
+// EVENT SUBSCRIPTION
 	void RegisterEvent()
 	{
 		Inputs.Player.Move.performed+=OnMove;
@@ -47,7 +47,7 @@ public class InputManager : MonoBehaviour
 		Inputs.Player.Sprint.canceled-=OnSprintCanceled;
 	}
 
-	// INPUT CALLBACKS
+// INPUT CALLBACKS
 	void OnMove(InputAction.CallbackContext ctx) => Move?.Invoke(ctx.ReadValue<Vector2>());
 	void OnLook(InputAction.CallbackContext ctx) => Look?.Invoke(ctx.ReadValue<Vector2>());
 	void OnJumpStarted(InputAction.CallbackContext ctx) => JumpPressed?.Invoke();
@@ -55,7 +55,7 @@ public class InputManager : MonoBehaviour
 	void OnSprintStarted(InputAction.CallbackContext ctx) => SprintPressed?.Invoke();
 	void OnSprintCanceled(InputAction.CallbackContext ctx) => SprintReleased?.Invoke();
 
-	// INIT & CLEANUP
+// INIT & CLEANUP
 	void Awake()
 	{
 		Inputs=new InputSystemActions();
@@ -68,7 +68,7 @@ public class InputManager : MonoBehaviour
 		Inputs.Disable();
 	}
 
-	//PLAYER STATE MANAGEMENT
+//PLAYER STATE MANAGEMENT
 	public void SetPlayerState(PlayerState playerState)
 	{
 		CurrentPlayerState=playerState;
@@ -93,7 +93,7 @@ public class InputManager : MonoBehaviour
 		}
 	}
 
-	// STATE CONFIG
+// STATE CONFIG
 	void SetUI()
 	{
 		Inputs.Player.Disable();
