@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	// SINGLETON
+// SINGLETON
 	public static GameManager Instance { get; private set; }
 
-	// MANAGER REFERENCES
+// MANAGER REFERENCES
 	public InputManager InputManager { get; private set; }
 
-	// INIT SINGLETON & MANAGER REFERENCES
+// INIT SINGLETON & MANAGER REFERENCES
 	void Awake()
 	{
 		if(Instance==null)
