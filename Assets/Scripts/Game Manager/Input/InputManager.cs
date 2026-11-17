@@ -1,0 +1,118 @@
+using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[DefaultExecutionOrder(-25)]
+public class InputManager : MonoBehaviour
+{
+	// INPUT SYSTEM
+	InputSystemActions Inputs;
+	public enum PlayerState
+	{
+		UI,
+		Player,
+		Cinematic
+	}
+	[SerializeField] PlayerState CurrentPlayerState=PlayerState.UI;
+
+	// INPUT EVENTS
+	public event Action<Vector2> Move;
+	public event Action<Vector2> Look;
+	public event Action JumpPressed;
+	public event Action InteractPressed;
+	public event Action SprintPressed;
+	public event Action SprintReleased;
+
+	// EVENT SUBSCRIPTION
+	void RegisterEvent()
+	{
+		Inputs.Player.Move.performed+=OnMove;
+		Inputs.Player.Move.canceled+=OnMove;
+		Inputs.Player.Look.performed+=OnLook;
+		Inputs.Player.Look.canceled+=OnLook;
+		Inputs.Player.Jump.started+=OnJumpStarted;
+		Inputs.Player.Interact.started+=OnInteractStarted;
+		Inputs.Player.Sprint.started+=OnSprintStarted;
+		Inputs.Player.Sprint.canceled+=OnSprintCanceled;
+	}
+	void UnregisterEvent()
+	{
+		Inputs.Player.Move.performed-=OnMove;
+		Inputs.Player.Move.canceled-=OnMove;
+		Inputs.Player.Look.performed-=OnLook;
+		Inputs.Player.Look.canceled-=OnLook;
+		Inputs.Player.Jump.started-=OnJumpStarted;
+		Inputs.Player.Interact.started-=OnInteractStarted;
+		Inputs.Player.Sprint.started-=OnSprintStarted;
+		Inputs.Player.Sprint.canceled-=OnSprintCanceled;
+	}
+
+	// INPUT CALLBACKS
+	void OnMove(InputAction.CallbackContext ctx) => Move?.Invoke(ctx.ReadValue<Vector2>());
+	void OnLook(InputAction.CallbackContext ctx) => Look?.Invoke(ctx.ReadValue<Vector2>());
+	void OnJumpStarted(InputAction.CallbackContext ctx) => JumpPressed?.Invoke();
+	void OnInteractStarted(InputAction.CallbackContext ctx) => InteractPressed?.Invoke();
+	void OnSprintStarted(InputAction.CallbackContext ctx) => SprintPressed?.Invoke();
+	void OnSprintCanceled(InputAction.CallbackContext ctx) => SprintReleased?.Invoke();
+
+	// INIT & CLEANUP
+	void Awake()
+	{
+		Inputs=new InputSystemActions();
+		RegisterEvent();
+		UpdatePlayerState();
+	}
+	void OnDestroy()
+	{
+		UnregisterEvent();
+		Inputs.Disable();
+	}
+
+	//PLAYER STATE MANAGEMENT
+	public void SetPlayerState(PlayerState playerState)
+	{
+		CurrentPlayerState=playerState;
+		UpdatePlayerState();
+	}
+	void UpdatePlayerState()
+	{
+		Inputs.Default.Enable();
+		switch(CurrentPlayerState)
+		{
+			case PlayerState.UI:
+				SetUI();
+				break;
+			case PlayerState.Player:
+				SetPlayer();
+				break;
+			case PlayerState.Cinematic:
+				SetCinematic();
+				break;
+			default:
+				break;
+		}
+	}
+
+	// STATE CONFIG
+	void SetUI()
+	{
+		Inputs.Player.Disable();
+		Inputs.UI.Enable();
+		Cursor.visible=true;
+		Cursor.lockState=CursorLockMode.None;
+	}
+	void SetPlayer()
+	{
+		Inputs.UI.Disable();
+		Inputs.Player.Enable();
+		Cursor.visible=true;
+		Cursor.lockState=CursorLockMode.None;
+	}
+	void SetCinematic()
+	{
+		Inputs.Player.Disable();
+		Inputs.UI.Disable();
+		Cursor.visible=true;
+		Cursor.lockState=CursorLockMode.None;
+	}
+}
