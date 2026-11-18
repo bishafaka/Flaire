@@ -59,8 +59,28 @@ public class PlayerController : MonoBehaviour
 	{
 		if(interactableInside==null)
 			return;
+		Interactable interactable=interactableInside.GetComponent<Interactable>();
+		if(interactable==null)
+			return;
+		switch(interactable.GetCategory())
+		{
+			case Interactable.Category.Mailbox:
+				Debug.Log("mailbox!");
+				break;
+			default:
+				break;
+		}
 	}
 
-// SETTER
-	public void SetInteractable(GameObject interactable) => interactableInside=interactable;
+// TRIGGER SET INTERACTABLE
+	void OnTriggerEnter(Collider other)
+	{
+		if(other.CompareTag("Interactable"))
+			interactableInside=other.gameObject;
+	}
+	void OnTriggerExit(Collider other)
+	{
+		if(other.CompareTag("Interactable"))
+			interactableInside=null;
+	}
 }
