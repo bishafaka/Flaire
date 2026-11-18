@@ -7,14 +7,15 @@ public class PlayerController : MonoBehaviour
 	const float SPRINT_MULTIPLIER=1.5f;
 	bool isSprint=false;
 	CharacterController characterController;
-	Transform meshTransform;
 	Vector2 dir;
+
+// PLAYER INTERACT
+	GameObject interactableInside=null;
 
 // INIT REFERENCES
 	void Awake()
 	{
 		characterController=GetComponent<CharacterController>();
-		meshTransform=GetComponentInChildren<Transform>();
 	}
 
 // EVENT SUBSCRIPTION
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
 			GameManager.Instance.InputManager.Move+=OnMove;
 			GameManager.Instance.InputManager.SprintPressed+=OnSprintPressed;
 			GameManager.Instance.InputManager.SprintReleased+=OnSprintReleased;
+			GameManager.Instance.InputManager.InteractPressed+=Interact;
 		}
 	}
 	void OnDisable()
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
 			GameManager.Instance.InputManager.Move-=OnMove;
 			GameManager.Instance.InputManager.SprintPressed-=OnSprintPressed;
 			GameManager.Instance.InputManager.SprintReleased-=OnSprintReleased;
+			GameManager.Instance.InputManager.InteractPressed-=Interact;
 		}
 	}
 
@@ -43,7 +46,7 @@ public class PlayerController : MonoBehaviour
 		Vector3 movement=new Vector3(dir.x, 0, dir.y).normalized;
 		float currentSpeed=isSprint ? SPEED*SPRINT_MULTIPLIER : SPEED;
 		if(movement!=Vector3.zero)
-			meshTransform.forward=movement;
+			transform.forward=movement;
 		characterController.Move(movement*currentSpeed*Time.deltaTime);
 	}
 
@@ -51,4 +54,33 @@ public class PlayerController : MonoBehaviour
 	void OnMove(Vector2 input) => dir=input;
 	void OnSprintPressed() => isSprint=true;
 	void OnSprintReleased() => isSprint=false;
+
+	void Interact()
+	{
+		if(interactableInside==null)
+			return;
+		Interactable interactable=interactableInside.GetComponent<Interactable>();
+		if(interactable==null)
+			return;
+		switch(interactable.GetCategory())
+		{
+			case Interactable.Category.Mailbox:
+				Debug.Log("mailbox!");
+				break;
+			default:
+				break;
+		}
+	}
+
+// TRIGGER SET INTERACTABLE
+	void OnTriggerEnter(Collider other)
+	{
+		if(other.CompareTag("Interactable"))
+			interactableInside=other.gameObject;
+	}
+	void OnTriggerExit(Collider other)
+	{
+		if(other.CompareTag("Interactable"))
+			interactableInside=null;
+	}
 }
