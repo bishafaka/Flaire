@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
 	CharacterController characterController;
 	Vector2 dir;
 
+// PLAYER INTERACT
+	GameObject interactableInside=null;
+
 // INIT REFERENCES
 	void Awake()
 	{
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
 			GameManager.Instance.InputManager.Move+=OnMove;
 			GameManager.Instance.InputManager.SprintPressed+=OnSprintPressed;
 			GameManager.Instance.InputManager.SprintReleased+=OnSprintReleased;
+			GameManager.Instance.InputManager.InteractPressed+=Interact;
 		}
 	}
 	void OnDisable()
@@ -32,6 +36,7 @@ public class PlayerController : MonoBehaviour
 			GameManager.Instance.InputManager.Move-=OnMove;
 			GameManager.Instance.InputManager.SprintPressed-=OnSprintPressed;
 			GameManager.Instance.InputManager.SprintReleased-=OnSprintReleased;
+			GameManager.Instance.InputManager.InteractPressed-=Interact;
 		}
 	}
 
@@ -49,4 +54,13 @@ public class PlayerController : MonoBehaviour
 	void OnMove(Vector2 input) => dir=input;
 	void OnSprintPressed() => isSprint=true;
 	void OnSprintReleased() => isSprint=false;
+
+	void Interact()
+	{
+		if(interactableInside==null)
+			return;
+	}
+
+// SETTER
+	public void SetInteractable(GameObject interactable) => interactableInside=interactable;
 }
