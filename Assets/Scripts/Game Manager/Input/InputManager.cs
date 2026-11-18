@@ -69,6 +69,7 @@ public class InputManager : MonoBehaviour
 	}
 
 //PLAYER STATE MANAGEMENT
+	public PlayerState GetPlayerState() { return CurrentPlayerState; }
 	public void SetPlayerState(PlayerState playerState)
 	{
 		CurrentPlayerState=playerState;
