@@ -7,14 +7,12 @@ public class PlayerController : MonoBehaviour
 	const float SPRINT_MULTIPLIER=1.5f;
 	bool isSprint=false;
 	CharacterController characterController;
-	Transform meshTransform;
 	Vector2 dir;
 
 // INIT REFERENCES
 	void Awake()
 	{
 		characterController=GetComponent<CharacterController>();
-		meshTransform=GetComponentInChildren<Transform>();
 	}
 
 // EVENT SUBSCRIPTION
@@ -43,7 +41,7 @@ public class PlayerController : MonoBehaviour
 		Vector3 movement=new Vector3(dir.x, 0, dir.y).normalized;
 		float currentSpeed=isSprint ? SPEED*SPRINT_MULTIPLIER : SPEED;
 		if(movement!=Vector3.zero)
-			meshTransform.forward=movement;
+			transform.forward=movement;
 		characterController.Move(movement*currentSpeed*Time.deltaTime);
 	}
 
