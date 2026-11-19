@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TimeManager : MonoBehaviour
@@ -10,6 +11,7 @@ public class TimeManager : MonoBehaviour
 	[SerializeField] float debugTimeSpeed=1f;
 
 // TIME VARIABLES
+	public event Action OnTimeChanged;
 	int day=1;
 	int hour=INIT_DAY_HOUR;
 	int minute=0;
@@ -31,6 +33,7 @@ public class TimeManager : MonoBehaviour
 				minute=0;
 				hour++;
 			}
+			OnTimeChanged?.Invoke();
 			if(hour>=END_DAY_HOUR)
 			{
 				finishedShift=true;
