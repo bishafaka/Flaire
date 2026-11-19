@@ -17,7 +17,102 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: b5f3eb02ba568a246a6991153cb662cc, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 38003025727488
+    m_Localized: 'To my sweetest little baker,
+
+
+      I hope this letter finds thee
+      well. Thy father tells me that some townsfolk have already begun visiting thy
+      shop. Oh, how proud I am of thee! I always knew those little hands of thine
+      would make wonderful things one day.
+
+
+      With all the love in the world,
+
+      mom.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50901701709824
+    m_Localized: 'To my sweetest little baker,
+
+
+      Today, whilst resting by the
+      window, I overheard two women speaking of a young baker whose bread is so wondrous
+      even travelling merchants stop by. I could not help but smile! I wish I had
+      been there to tell them such a gifted baker is my very own son.
+
+
+      With
+      all the love in the world,
+
+      mom.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 57453489770496
+    m_Localized: 'To my sweetest little baker,
+
+
+      Thou shalt have placed thy
+      mark upon the loaves that come forth from thy oven by now, has thou not? For
+      every loaf that leaves thy over bear the mark of thy hands, for thus shall
+      all know the labour throughout the kingdom.
+
+
+      With all the love in the
+      world,
+
+      mom.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61494328381440
+    m_Localized: 'To my sweetest little baker,
+
+
+      How I wish thou couldst be
+      here today, seated by my side, if only for a fleeting moment... Whilst the
+      scent of toasted almonds, flour and golden sugar fills our humble home. It
+      shall always be the fragrance of our family, and I send thee my recipe so that,
+      as thou prepare it, thou mayst feel a little closer to home.
+
+
+      A little
+      tear lath fallen as I wrote these words,
+
+      mom.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63549453455360
+    m_Localized: 'My son,
+
+
+      Has thou made any new acquaintances? I remember
+      how shy thou art, and I daresay thou hast not even tried. I jest, of course.
+      Thy mother is reading this very letter over my shoulder, and I fear I may not
+      live long enough to send it.
+
+
+      With much love,
+
+      thy father.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63579245596672
+    m_Localized: 'My son,
+
+
+      I write to inform thee that thy mother hath taken
+      ill these past few days, nothing thou shouldst lose sleep over, yet she is
+      in need of rest, thou mayst not recieve as many letters from her as she would
+      wish. Think not that we hath forgotten thee.
+
+
+      Lose not heart and continue
+      thy good work,
+
+      dad.'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

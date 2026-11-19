@@ -14,7 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
   m_TableCollectionName: LetterContent
   m_TableCollectionNameGuidString: b5f3eb02ba568a246a6991153cb662cc
-  m_Entries: []
+  m_Entries:
+  - m_Id: 38003025727488
+    m_Key: Mom_00
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50901701709824
+    m_Key: Mom_01
+    m_Metadata:
+      m_Items: []
+  - m_Id: 57453489770496
+    m_Key: Mom_02
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61494328381440
+    m_Key: Mom_03
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63549453455360
+    m_Key: Dad_00
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63579245596672
+    m_Key: Dad_01
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

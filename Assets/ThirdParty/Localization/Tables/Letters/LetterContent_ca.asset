@@ -17,7 +17,52 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: b5f3eb02ba568a246a6991153cb662cc, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 38003025727488
+    m_Localized: "Al meu petit forner,\n\nEspero que estiguis b\xE9. Ton pare m\u2019explica
+      que alguns ve\xEFns ja han comen\xE7at a visitar la teua petita botiga. Oh,
+      que orgullosa estic de tu! Sempre he sabut que les teues manetes farien coses
+      meravelloses algun dia.\n\nAmb tot l\u2019amor del m\xF3n,\nmama."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50901701709824
+    m_Localized: "Al meu petit forner,\n\nAvui, mentres reposava vora la finestra,
+      he sentit dues dones parlar d\u2019un jove forner que prepara uns pans tan
+      bons que fins i tot els mercaders s\u2019aturen a comprar-ne. No cal dir que
+      he sonrigut en sertir-ho! M\u2019hauria agradat ser-hi per explicar-los que
+      aquell forner tan h\xE0bil es el meu fill.\n\nAmb tot l\u2019amor del m\xF3n,\nmama."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 57453489770496
+    m_Localized: "Al meu petit forner,\n\nJa deus estar posant la teua petita marca
+      als pans, oi? No te n\u2019oblidis! Vull que cada pa que surti del teu forn
+      dugi la marca de les teves mans, car aix\xED tothom podr\xE0 recon\xE8ixer
+      el teu treball per tot el regne.\n\nAmb tot l\u2019amor del m\xF3n,\nmama."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61494328381440
+    m_Localized: "Al meu petit forner,\n\nDesitjaria que avui poguessis ser aqu\xED,
+      assegut al meu costat, ni que fos per un breu instant... Mentre el flaire de
+      les atmelles torrades, la farina i el sucre daurant-se omple la nostre llar.
+      Sempre ser\xE0 l\u2019olor de la familia, i t\u2019envio la meva recepta perqu\xE8,
+      en preparar-la, puguis sentir-te una mica m\xE9s a prop de casa.\n\nSe m\u2019ha
+      escapat una llagrimeta mentres escrivia,\nmama."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63549453455360
+    m_Localized: "Meu fill,\n\nHas fet noves coneixences? Recordo lo vergony\xF3s
+      que ets i no m\u2019espero que ho haguis intentat. Es broma, la teua mare mira
+      el que escric per damunt les meues espatlles i quasi no visc per enviar-la.\n\nAmb
+      molta estima,\nton pare."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63579245596672
+    m_Localized: "Meu fill,\n\nT\u2019escric per fer-te saber que la teva mare ha
+      caigut malalta aquests darrers dies, res que t\u2019hagi de treu-re el son,
+      per\xF2 necessita rep\xF2s, i no podr\xE0 escriure\u2019t tantes cartes com
+      ella voldria. No pensis pas que ens hem oblidat de tu.\n\nNo et desmotivis,\npapa."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
