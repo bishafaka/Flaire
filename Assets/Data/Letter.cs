@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.Localization;
 
 [CreateAssetMenu(fileName="Letter", menuName="Flaire/Letter")]
 public class Letter : ScriptableObject
 {
 // LETTER DATA
-	[SerializeField, TextArea] string letterContent;
+	[SerializeField] LocalizedString letterContent;
 
 // GETTERS
-	public string LetterContent => letterContent;
+	public LocalizedString LetterContent => letterContent;
 }
