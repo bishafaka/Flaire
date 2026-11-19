@@ -58,4 +58,5 @@ public class TimeManager : MonoBehaviour
 	public int GetDay() { return day; }
 	public int GetHour() { return hour; }
 	public int GetMinute() { return minute; }
+	public bool IsShiftFinished() { return finishedShift; }
 }
