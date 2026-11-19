@@ -193,7 +193,8 @@ GameObject:
   - component: {fileID: 8978897580508845235}
   - component: {fileID: 8035064444954361109}
   - component: {fileID: 3851462388187327966}
-  - component: {fileID: 7658708060809284910}
+  - component: {fileID: 2515953460014247548}
+  - component: {fileID: 5153761914324740760}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -254,7 +255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 534bb0f997fc6694f803ce49f25ae6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
---- !u!65 &7658708060809284910
+  interactableInside: {fileID: 0}
+--- !u!65 &2515953460014247548
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,8 +275,35 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2, z: 1.25}
-  m_Center: {x: 0, y: 0, z: 1.25}
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0, z: 1}
+--- !u!54 &5153761914324740760
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6041240297330826923}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7281242599766831818
 GameObject:
   m_ObjectHideFlags: 0
