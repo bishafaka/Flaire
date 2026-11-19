@@ -64,17 +64,7 @@ public class PlayerController : MonoBehaviour
 		Interactable interactable=interactableInside.GetComponent<Interactable>();
 		if(interactable==null)
 			return;
-		switch(interactable.GetCategory())
-		{
-			case Interactable.Category.Mailbox:
-				Debug.Log("mailbox!");
-				break;
-			case Interactable.Category.Door:
-				Debug.Log("door!");
-				break;
-			default:
-				break;
-		}
+		interactable.Interact();
 	}
 
 // TRIGGER SET INTERACTABLE
