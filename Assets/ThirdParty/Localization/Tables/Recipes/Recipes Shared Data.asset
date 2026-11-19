@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Recipes Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: Recipes
+  m_TableCollectionNameGuidString: ca9386bfde9d2bd43881facf06086b93
+  m_Entries:
+  - m_Id: 11292725248
+    m_Key: FineWheatBread
+    m_Metadata:
+      m_Items: []
+  - m_Id: 223675502592
+    m_Key: CountryBread
+    m_Metadata:
+      m_Items: []
+  - m_Id: 331347480576
+    m_Key: BarleyBread
+    m_Metadata:
+      m_Items: []
+  - m_Id: 455884754944
+    m_Key: RyeBread
+    m_Metadata:
+      m_Items: []
+  - m_Id: 564173295616
+    m_Key: BrownBread
+    m_Metadata:
+      m_Items: []
+  - m_Id: 686059769856
+    m_Key: WhiteBread
+    m_Metadata:
+      m_Items: []
+  - m_Id: 781123670016
+    m_Key: FlatBread
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3007330209792
+    m_Key: ThinWafers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3010824065024
+    m_Key: AlmondRusks
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3012598255616
+    m_Key: LadyFingers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3014326308864
+    m_Key: NunsFarts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3026020028416
+    m_Key: AlmondBiscuits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8609846611968
+    m_Key: Flaons
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8728113401856
+    m_Key: Xuixo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8894518218752
+    m_Key: WindDonuts
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9094393581568
+    m_Key: PorkCracklingCake
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9395150344192
+    m_Key: Ensaimada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14186291220480
+    m_Key: SpongeCake
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14613325893632
+    m_Key: JohnDayCake
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14810621759488
+    m_Key: ThreeKingsCake
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15458348126208
+    m_Key: WhiteAlmondCream
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15492380708864
+    m_Key: CatalanBurntCream
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15521866665984
+    m_Key: HoneyAndFreshCheese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15583669735424
+    m_Key: EggCustard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15728465498112
+    m_Key: RicePudding
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16915243814912
+    m_Key: AlmondAndPineNutSweets
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6468399864070537292
+  references:
+    version: 2
+    RefIds:
+    - rid: 6468399864070537292
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1795114488888
