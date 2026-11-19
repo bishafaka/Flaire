@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3214167662447093480}
   - component: {fileID: 9001895933255828069}
-  - component: {fileID: 8624182680026816184}
+  - component: {fileID: 3783512406381206110}
   m_Layer: 0
   m_Name: Mailbox
   m_TagString: Interactable
@@ -55,7 +55,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &8624182680026816184
+--- !u!114 &3783512406381206110
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,9 +64,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 848584646568871406}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32adda56ec67345489acc2a3f08f973a, type: 3}
+  m_Script: {fileID: 11500000, guid: d8603ab2eb7e4aa4ab6d0779756b49e1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  m_EditorClassIdentifier: Assembly-CSharp::Mailbox
   type: 0
 --- !u!1 &1546463019994676569
 GameObject:
