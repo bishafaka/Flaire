@@ -21,22 +21,24 @@ public class PlayerController : MonoBehaviour
 // EVENT SUBSCRIPTION
 	void OnEnable()
 	{
-		if(GameManager.Instance.InputManager!=null)
+		InputManager inputManager=GameManager.Instance.InputManager;
+		if(inputManager!=null)
 		{
-			GameManager.Instance.InputManager.Move+=OnMove;
-			GameManager.Instance.InputManager.SprintPressed+=OnSprintPressed;
-			GameManager.Instance.InputManager.SprintReleased+=OnSprintReleased;
-			GameManager.Instance.InputManager.InteractPressed+=Interact;
+			inputManager.Move+=OnMove;
+			inputManager.SprintPressed+=OnSprintPressed;
+			inputManager.SprintReleased+=OnSprintReleased;
+			inputManager.InteractPressed+=Interact;
 		}
 	}
 	void OnDisable()
 	{
-		if(GameManager.Instance.InputManager!=null)
+		InputManager inputManager=GameManager.Instance.InputManager;
+		if(inputManager!=null)
 		{
-			GameManager.Instance.InputManager.Move-=OnMove;
-			GameManager.Instance.InputManager.SprintPressed-=OnSprintPressed;
-			GameManager.Instance.InputManager.SprintReleased-=OnSprintReleased;
-			GameManager.Instance.InputManager.InteractPressed-=Interact;
+			inputManager.Move-=OnMove;
+			inputManager.SprintPressed-=OnSprintPressed;
+			inputManager.SprintReleased-=OnSprintReleased;
+			inputManager.InteractPressed-=Interact;
 		}
 	}
 
