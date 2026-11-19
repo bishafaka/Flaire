@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[DefaultExecutionOrder(-50)]
 public class GameManager : MonoBehaviour
 {
 // SINGLETON
@@ -7,8 +8,9 @@ public class GameManager : MonoBehaviour
 
 // MANAGER REFERENCES
 	public InputManager InputManager { get; private set; }
+	public TimeManager TimeManager { get; private set; }
 
-// INIT SINGLETON & MANAGER REFERENCES
+	// INIT SINGLETON & MANAGER REFERENCES
 	void Awake()
 	{
 		if(Instance==null)
@@ -17,6 +19,8 @@ public class GameManager : MonoBehaviour
 			DontDestroyOnLoad(this);
 			if(InputManager==null)
 				InputManager=GetComponent<InputManager>();
+			if(TimeManager==null)
+				TimeManager=GetComponent<TimeManager>();
 		}
 		else
 			Destroy(gameObject);
