@@ -69,6 +69,9 @@ public class PlayerController : MonoBehaviour
 			case Interactable.Category.Mailbox:
 				Debug.Log("mailbox!");
 				break;
+			case Interactable.Category.Door:
+				Debug.Log("door!");
+				break;
 			default:
 				break;
 		}
