@@ -12,6 +12,7 @@ public class TimeManager : MonoBehaviour
 
 // TIME VARIABLES
 	public event Action OnTimeChanged;
+	public event Action OnDayChanged;
 	int day=1;
 	int hour=INIT_DAY_HOUR;
 	int minute=0;
@@ -48,8 +49,9 @@ public class TimeManager : MonoBehaviour
 		hour=INIT_DAY_HOUR;
 		minute=0;
 		timer=0;
-		finishedShift=false;
 		day++;
+		finishedShift=false;
+		OnDayChanged?.Invoke();
 	}
 
 // GETTERS
