@@ -6,6 +6,7 @@ public class Letter : ScriptableObject
 {
 // LETTER DATA
 	[SerializeField] LocalizedString letterContent;
+	[SerializeField] Recipe recipe;
 
 // GETTERS
 	public LocalizedString LetterContent => letterContent;
