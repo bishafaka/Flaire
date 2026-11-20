@@ -12,6 +12,7 @@ public class TimeManager : MonoBehaviour
 
 // TIME VARIABLES
 	public event Action OnTimeChanged;
+	public event Action OnDayChanged;
 	int day=1;
 	int hour=INIT_DAY_HOUR;
 	int minute=0;
@@ -21,7 +22,7 @@ public class TimeManager : MonoBehaviour
 // UPDATE TIMER
 	void Update()
 	{
-		if(finishedShift||GameManager.Instance.InputManager.GetPlayerState()!=InputManager.PlayerState.Player)
+		if(finishedShift||GameManager.Instance.InputManager.GetPlayerState!=InputManager.PlayerState.Player)
 			return;
 		timer+=debugTimeSpeed*Time.deltaTime;
 		while(timer>=1f)
@@ -48,12 +49,14 @@ public class TimeManager : MonoBehaviour
 		hour=INIT_DAY_HOUR;
 		minute=0;
 		timer=0;
-		finishedShift=false;
 		day++;
+		finishedShift=false;
+		OnDayChanged?.Invoke();
 	}
 
 // GETTERS
 	public int GetDay() { return day; }
 	public int GetHour() { return hour; }
 	public int GetMinute() { return minute; }
+	public bool IsShiftFinished() { return finishedShift; }
 }
