@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45c9207a518bfd4f949eec68bc2cbb9, type: 3}
   m_Name: CountryBread
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  recipeID: 0
+  recipeID: 51eb73c21c
   recipeName:
     m_TableReference:
       m_TableCollectionName: GUID:ca9386bfde9d2bd43881facf06086b93
@@ -24,7 +24,7 @@ MonoBehaviour:
     m_LocalVariables: []
   recipePrice: 0
   recipeIcon: {fileID: 0}
-  recipePrefab: {fileID: 0}
+  recipePrefab: {fileID: 6211735741340607026, guid: 6899411601a7f1e4897039567d371941, type: 3}
   recipeCategory: 0
   recipeRarity: 2
   references:

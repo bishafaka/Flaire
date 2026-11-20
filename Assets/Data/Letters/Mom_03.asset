@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0be07badb103c594890f71c88a11122c, type: 3}
   m_Name: Mom_03
   m_EditorClassIdentifier: Assembly-CSharp::Letter
+  letterID: c657586de5
   letterSender:
     m_TableReference:
       m_TableCollectionName: GUID:38d2d7dd541ebf142a10165ef404c0a7
