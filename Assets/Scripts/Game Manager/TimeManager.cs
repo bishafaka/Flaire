@@ -22,7 +22,7 @@ public class TimeManager : MonoBehaviour
 // UPDATE TIMER
 	void Update()
 	{
-		if(finishedShift||GameManager.Instance.InputManager.GetPlayerState()!=InputManager.PlayerState.Player)
+		if(finishedShift||GameManager.Instance.InputManager.GetPlayerState!=InputManager.PlayerState.Player)
 			return;
 		timer+=debugTimeSpeed*Time.deltaTime;
 		while(timer>=1f)
