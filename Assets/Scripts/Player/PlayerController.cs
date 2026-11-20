@@ -10,9 +10,10 @@ public class PlayerController : MonoBehaviour
 	Vector2 dir;
 
 // PLAYER INTERACT
-	GameObject interactableInside=null;
+	GameObject currentInteractable=null;
+	Interactable currentInteractableScript=null;
 
-// INIT REFERENCES
+	// INIT REFERENCES
 	void Awake()
 	{
 		characterController=GetComponent<CharacterController>();
@@ -59,23 +60,28 @@ public class PlayerController : MonoBehaviour
 
 	void Interact()
 	{
-		if(interactableInside==null)
+		if(currentInteractable==null)
 			return;
-		Interactable interactable=interactableInside.GetComponent<Interactable>();
-		if(interactable==null)
+		if(currentInteractableScript==null)
 			return;
-		interactable.Interact();
+		currentInteractableScript.Interact();
 	}
 
 // TRIGGER SET INTERACTABLE
 	void OnTriggerEnter(Collider other)
 	{
 		if(other.CompareTag("Interactable"))
-			interactableInside=other.gameObject;
+		{
+			currentInteractable=other.gameObject;
+			currentInteractableScript=other.GetComponent<Interactable>();
+		}
 	}
 	void OnTriggerExit(Collider other)
 	{
 		if(other.CompareTag("Interactable"))
-			interactableInside=null;
+		{
+			currentInteractable=null;
+			currentInteractableScript=null;
+		}
 	}
 }
