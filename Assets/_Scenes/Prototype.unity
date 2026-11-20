@@ -383,6 +383,17 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &703966174 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2969180364178802424, guid: 8113921cd2f08e54a98c05d56d8a892e, type: 3}
+  m_PrefabInstance: {fileID: 836940811}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca012039818d9a4186bb2f95b81f2b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIController
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,6 +649,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3783512406381206110, guid: 0ef9e3e1693cefe429e55cb1a6d02166, type: 3}
+      propertyPath: uiController
+      value: 
+      objectReference: {fileID: 703966174}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
