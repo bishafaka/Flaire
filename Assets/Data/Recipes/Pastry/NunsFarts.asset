@@ -24,7 +24,7 @@ MonoBehaviour:
     m_LocalVariables: []
   recipePrice: 0
   recipeIcon: {fileID: 0}
-  recipePrefab: {fileID: 0}
+  recipePrefab: {fileID: 1704158977212078474, guid: 9558a7cf17768cd499c49f93c866bf14, type: 3}
   recipeCategory: 1
   recipeRarity: 1
   references:
