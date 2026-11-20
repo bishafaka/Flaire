@@ -28,6 +28,6 @@ public class Mailbox : Interactable
 	public override void Interact()
 	{
 		base.Interact();
-		uiController.ToggleMailbox();
+		uiController.ShowMailbox();
 	}
 }
