@@ -10,5 +10,7 @@ public class Letter : ScriptableObject
 	[SerializeField] Recipe recipe;
 
 // GETTERS
+	public LocalizedString LetterSender => letterSender;
+
 	public LocalizedString LetterContent => letterContent;
 }
