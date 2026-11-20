@@ -22,8 +22,9 @@ public class InputManager : MonoBehaviour
 	public event Action InteractPressed;
 	public event Action SprintPressed;
 	public event Action SprintReleased;
+	public event Action pausePressed;
 
-// EVENT SUBSCRIPTION
+	// EVENT SUBSCRIPTION
 	void RegisterEvent()
 	{
 		Inputs.Player.Move.performed+=OnMove;
@@ -34,6 +35,7 @@ public class InputManager : MonoBehaviour
 		Inputs.Player.Interact.started+=OnInteractStarted;
 		Inputs.Player.Sprint.started+=OnSprintStarted;
 		Inputs.Player.Sprint.canceled+=OnSprintCanceled;
+		Inputs.Default.Pause.started+=OnPauseStarted;
 	}
 	void UnregisterEvent()
 	{
@@ -45,6 +47,7 @@ public class InputManager : MonoBehaviour
 		Inputs.Player.Interact.started-=OnInteractStarted;
 		Inputs.Player.Sprint.started-=OnSprintStarted;
 		Inputs.Player.Sprint.canceled-=OnSprintCanceled;
+		Inputs.Default.Pause.started-=OnPauseStarted;
 	}
 
 // INPUT CALLBACKS
@@ -54,8 +57,9 @@ public class InputManager : MonoBehaviour
 	void OnInteractStarted(InputAction.CallbackContext ctx) => InteractPressed?.Invoke();
 	void OnSprintStarted(InputAction.CallbackContext ctx) => SprintPressed?.Invoke();
 	void OnSprintCanceled(InputAction.CallbackContext ctx) => SprintReleased?.Invoke();
+	void OnPauseStarted(InputAction.CallbackContext ctx) => pausePressed?.Invoke();
 
-// INIT & CLEANUP
+	// INIT & CLEANUP
 	void Awake()
 	{
 		Inputs=new InputSystemActions();
@@ -69,7 +73,7 @@ public class InputManager : MonoBehaviour
 	}
 
 //PLAYER STATE MANAGEMENT
-	public PlayerState GetPlayerState() { return CurrentPlayerState; }
+	public PlayerState GetPlayerState => CurrentPlayerState;
 	public void SetPlayerState(PlayerState playerState)
 	{
 		CurrentPlayerState=playerState;
@@ -78,6 +82,8 @@ public class InputManager : MonoBehaviour
 	void UpdatePlayerState()
 	{
 		Inputs.Default.Enable();
+		Inputs.Player.Disable();
+		Inputs.UI.Disable();
 		switch(CurrentPlayerState)
 		{
 			case PlayerState.UI:
@@ -97,22 +103,14 @@ public class InputManager : MonoBehaviour
 // STATE CONFIG
 	void SetUI()
 	{
-		Inputs.Player.Disable();
 		Inputs.UI.Enable();
-		Cursor.visible=true;
-		Cursor.lockState=CursorLockMode.None;
 	}
 	void SetPlayer()
 	{
-		Inputs.UI.Disable();
 		Inputs.Player.Enable();
-		Cursor.visible=true;
-		Cursor.lockState=CursorLockMode.None;
 	}
 	void SetCinematic()
 	{
-		Inputs.Player.Disable();
-		Inputs.UI.Disable();
 		Cursor.visible=true;
 		Cursor.lockState=CursorLockMode.None;
 	}
