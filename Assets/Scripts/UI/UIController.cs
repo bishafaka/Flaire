@@ -11,6 +11,7 @@ public class UIController : MonoBehaviour
 	[SerializeField] GameObject letterPanel;
 	[SerializeField] TextMeshProUGUI letterText;
 	TimeManager timeManager;
+	InputManager inputManager;
 
 // INIT & CLEANUP EVENT
 	void Start()
@@ -24,27 +25,55 @@ public class UIController : MonoBehaviour
 		timeManager.OnTimeChanged-=UpdateTime;
 	}
 
+// EVENT SUBSCRIPTION
+	void OnEnable()
+	{
+		inputManager=GameManager.Instance.InputManager;
+		if(inputManager!=null)
+		{
+			inputManager.pausePressed+=Pause;
+		}
+	}
+	void OnDisable()
+	{
+		if(inputManager!=null)
+		{
+			inputManager.pausePressed-=Pause;
+		}
+	}
 // UI TIME
 	void UpdateTime()
 	{
 		timeText.text=$"{timeManager.GetHour():00} : {timeManager.GetMinute():00}";
 	}
 
-// UI MAILBOX
-	public void ToggleMailbox()
+// PAUSE PRESSED
+	void Pause()
 	{
+		if(letterPanel.activeSelf)
+		{
+			HideLetter();
+			return;
+		}
 		if(mailboxPanel.activeSelf)
 		{
-			GameManager.Instance.InputManager.SetPlayerState(InputManager.PlayerState.Player);
-			mailboxPanel.SetActive(false);
-			timePanel.SetActive(true);
+			HideMailbox();
+			return;
 		}
-		else
-		{
-			GameManager.Instance.InputManager.SetPlayerState(InputManager.PlayerState.UI);
-			mailboxPanel.SetActive(true);
-			timePanel.SetActive(false);
-		}
+	}
+
+// UI MAILBOX
+	public void ShowMailbox()
+	{
+		mailboxPanel.SetActive(true);
+		timePanel.SetActive(false);
+		inputManager.SetPlayerState(InputManager.PlayerState.UI);
+	}
+	public void HideMailbox()
+	{
+		mailboxPanel.SetActive(false);
+		timePanel.SetActive(true);
+		inputManager.SetPlayerState(InputManager.PlayerState.Player);
 	}
 
 // UI LETTER
