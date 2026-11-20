@@ -1,14 +1,15 @@
 using UnityEngine;
+using UnityEngine.Localization;
 
 [CreateAssetMenu(fileName="Recipe", menuName="Flaire/Recipe")]
 public class Recipe : ScriptableObject
 {
-	public enum Category { Bread, Pastry, Wafers }
-	public enum Rarity { Common, Rare, Legendary }
+	public enum Category { Bread, Pastry, Cake, Cream }
+	public enum Rarity { Common, Rare, Legendary, Seasonal }
 
 // RECIPE DATA
 	[SerializeField] int recipeID;
-	[SerializeField] string recipeName;
+	[SerializeField] LocalizedString recipeName;
 	[SerializeField] int recipePrice;
 	[SerializeField] Sprite recipeIcon;
 	[SerializeField] GameObject recipePrefab;
@@ -17,7 +18,7 @@ public class Recipe : ScriptableObject
 
 // GETTERS
 	public int RecipeID => recipeID;
-	public string RecipeName => recipeName;
+	public LocalizedString RecipeName => recipeName;
 	public int RecipePrice => recipePrice;
 	public Sprite RecipeIcon => recipeIcon;
 	public GameObject RecipePrefab => recipePrefab;
