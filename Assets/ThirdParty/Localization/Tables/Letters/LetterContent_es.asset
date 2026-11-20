@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: LetterContent_es
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: b5f3eb02ba568a246a6991153cb662cc, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 38003025727488
+    m_Localized: "A mi peque\xF1o panadero,\n\nEspero que est\xE9s bien. Tu padre
+      me cuenta que algunos vecinos ya han comenzado a visitar tu peque\xF1a panader\xEDa.
+      \xA1Oh, que orgullosa estoy de ti! Siempre supe que tus manitas har\xEDan cosas
+      maravillosas alg\xFAn d\xEDa.\n\nCon todo el amor del mundo,\nmam\xE1."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50901701709824
+    m_Localized: "A mi peque\xF1o panadero,\n\nHoy, mientras descansaba junto a la
+      ventana, he escuchado a dos mujeres hablar de un joven panadero que prepara
+      unos panes tan buenos que incluso los mercaderes se detienen a comprarlos.
+      \xA1No he podido evitar sonre\xEDr! Me habr\xEDa encantado estar all\xED para
+      contarles que aquel h\xE1bil panadero es mi hijo.\n\nCon todo el amor del mundo,\nmam\xE1."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 57453489770496
+    m_Localized: "A mi peque\xF1o panadero,\n\nYa habr\xE1s puesto tu se\xF1al en
+      los panes que salen de tu horno, \xBFverdad? \xA1No te olvides! Quiero que
+      todo pan que salga de tu horno lleve la marca de tus manos, pues as\xED todos
+      reconoceran tu trabajo por todo el reino.\n\nCon todo el amor del mundo,\nmam\xE1."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 61494328381440
+    m_Localized: "A mi peque\xF1o panadero,\n\nDesearia que hoy pudieras estar aqu\xED,
+      a mi lado, aunque solo fuese un breve instante... Mientras el aroma de las
+      almendras tostadas, la harina y el az\xFAcar dor\xE1ndose llena nuestro hogar.
+      Siempre ser\xE1 el olor de la familia, y te env\xEDo mi receta para que, al
+      preparar-la, puedas sentir-te un poquito m\xE1s cerca de casa.\n\nSe me ha
+      escapado una lagrimita mientras escrib\xEDa,\nmam\xE1."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63549453455360
+    m_Localized: "Mi hijo,\n\n\xBFHas hecho nuevas amistades? Me acuerdo de lo vergonzoso
+      que eres i no me creo que ni lo hayas intentado. Es broma, tu madre observa
+      lo que escribo por encima de mi hombro y casi no vivo para enviarla.\n\nCon
+      mucho amor,\ntu padre."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63579245596672
+    m_Localized: "Mi hijo,\n\nTe escribo para hacerte saber que tu madre ha ca\xEDdo
+      enferma estos \xFAltimos d\xEDas, nada que deba quitarte el sue\xF1o, pero
+      necesita reposo, i no podr\xE1 enviarte la cantidad de cartas que a ella le
+      gustar\xEDa. No pienses nunca que nos hemos olvidado de ti.\n\nNo te desmotives,\npapa."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
