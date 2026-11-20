@@ -3,6 +3,7 @@ using UnityEngine;
 public class Mailbox : Interactable
 {
 // REFERENCES
+	[SerializeField] UIController uiController;
 	TimeManager timeManager;
 
 // INIT & CLEANUP EVENT
@@ -27,5 +28,6 @@ public class Mailbox : Interactable
 	public override void Interact()
 	{
 		base.Interact();
+		uiController.ToggleMailbox();
 	}
 }
