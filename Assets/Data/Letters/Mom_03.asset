@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0be07badb103c594890f71c88a11122c, type: 3}
   m_Name: Mom_03
   m_EditorClassIdentifier: Assembly-CSharp::Letter
+  letterSender:
+    m_TableReference:
+      m_TableCollectionName: GUID:38d2d7dd541ebf142a10165ef404c0a7
+    m_TableEntryReference:
+      m_KeyId: 108936122368
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   letterContent:
     m_TableReference:
       m_TableCollectionName: GUID:b5f3eb02ba568a246a6991153cb662cc

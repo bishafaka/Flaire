@@ -22,6 +22,12 @@ MonoBehaviour:
     - Locale-ca
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ee5809f9bbbbf742b1e8367b687a067
+    m_Address: LetterSender_ca
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ca
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6bb5a8dd440474344bdd529d5f13e284
     m_Address: Recipes_ca
     m_ReadOnly: 1

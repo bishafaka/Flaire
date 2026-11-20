@@ -5,6 +5,7 @@ using UnityEngine.Localization;
 public class Letter : ScriptableObject
 {
 // LETTER DATA
+	[SerializeField] LocalizedString letterSender;
 	[SerializeField] LocalizedString letterContent;
 	[SerializeField] Recipe recipe;
 
