@@ -24,6 +24,14 @@ MonoBehaviour:
       abans d'aleshores!"
     m_Metadata:
       m_Items: []
+  - m_Id: 212279578624
+    m_Localized: Deixeu passar el dia!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 214489976832
+    m_Localized: Encara no...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

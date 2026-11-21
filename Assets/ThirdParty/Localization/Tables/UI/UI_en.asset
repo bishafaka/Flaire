@@ -25,6 +25,14 @@ MonoBehaviour:
       bakery closes its doors. Make sure to finish all your tasks before then!'
     m_Metadata:
       m_Items: []
+  - m_Id: 212279578624
+    m_Localized: Let the day skip!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 214489976832
+    m_Localized: Not yet...
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

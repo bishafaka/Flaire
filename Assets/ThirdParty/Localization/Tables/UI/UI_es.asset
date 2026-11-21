@@ -24,6 +24,14 @@ MonoBehaviour:
       vuestros quehaceres antes de entonces!"
     m_Metadata:
       m_Items: []
+  - m_Id: 212279578624
+    m_Localized: "\xA1Dejad pasar el d\xEDa!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 214489976832
+    m_Localized: "A\xFAn no..."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
