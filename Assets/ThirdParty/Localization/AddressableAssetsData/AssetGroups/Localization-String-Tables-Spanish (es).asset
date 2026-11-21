@@ -22,6 +22,13 @@ MonoBehaviour:
     - Locale-es
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d3db42276bc76b44b28e9894de429fd
+    m_Address: UI_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c871fb4d8cf215b4cb71b3a2fe22458b
     m_Address: Recipes_es
     m_ReadOnly: 1
