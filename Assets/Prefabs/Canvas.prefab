@@ -1074,10 +1074,10 @@ MonoBehaviour:
   mailboxPanel: {fileID: 4653338782578333955}
   mailBoxLetters:
   - {fileID: 5071073562964780149}
-  - {fileID: 8540595039088026031}
-  - {fileID: 6001461406397198029}
   - {fileID: 7292165348299247893}
   - {fileID: 3936412427180896218}
+  - {fileID: 6001461406397198029}
+  - {fileID: 8540595039088026031}
   - {fileID: 8991756632368883808}
   letterPanel: {fileID: 6690141677481532202}
   letterText: {fileID: 8116288810342524163}
@@ -1362,7 +1362,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2969180364178802424}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: ToggleMailbox
+        m_MethodName: HideMailbox
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
