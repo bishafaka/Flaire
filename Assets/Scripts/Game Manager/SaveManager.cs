@@ -1,3 +1,6 @@
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,19 +17,29 @@ public class SaveData
 
 public class SaveManager : MonoBehaviour
 {
-	// SAVE DATA
+// SAVE DATA
 	SaveData saveData=new SaveData();
 
-	// PATH TO SAVE DATA
+// PATH TO SAVE DATA
 	string SavePath => Path.Combine(Application.persistentDataPath, "saveData.json");
 
-	// EVENTS
+// EVENTS
 	public event Action OnSaveDataChanged;
 
-	// INIT
+// ALL DATA 
+	public List<Letter> allLetters=new List<Letter>();
+	public List<Recipe> allRecipes=new List<Recipe>();
+
+// INIT
 	void Awake()
 	{
 		LoadGame();
+	// REMOVES LETTERS ALREADY SEEN FROM SAVE DATA
+		for(int i=allLetters.Count-1; i>=0; i--)
+		{
+			if(HasRecievedLetter(allLetters[i]))
+				allLetters.RemoveAt(i);
+		}
 		Debug.Log(Application.persistentDataPath);
 	}
 
@@ -126,4 +139,31 @@ public class SaveManager : MonoBehaviour
 	{
 		SaveGame();
 	}
+
+// REFRESH ALL RECIPES AND LETTERS LISTS
+#if UNITY_EDITOR
+	[ContextMenu("Collect All Data")]
+	void CollectAllData()
+	{
+		allLetters.Clear();
+		allRecipes.Clear();
+		string[] letterGuids=AssetDatabase.FindAssets("t:Letter");
+		foreach(string guid in letterGuids)
+		{
+			string path=AssetDatabase.GUIDToAssetPath(guid);
+			Letter letter=AssetDatabase.LoadAssetAtPath<Letter>(path);
+			if(letter!=null)
+				allLetters.Add(letter);
+		}
+		string[] recipeGuids=AssetDatabase.FindAssets("t:Recipe");
+		foreach(string guid in recipeGuids)
+		{
+			string path=AssetDatabase.GUIDToAssetPath(guid);
+			Recipe recipe=AssetDatabase.LoadAssetAtPath<Recipe>(path);
+			if(recipe!=null)
+				allRecipes.Add(recipe);
+		}
+		EditorUtility.SetDirty(this);
+	}
+#endif
 }
