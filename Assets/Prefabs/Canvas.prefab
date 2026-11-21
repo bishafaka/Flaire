@@ -1362,7 +1362,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2969180364178802424}
         m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: ToggleMailbox
+        m_MethodName: HideMailbox
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
