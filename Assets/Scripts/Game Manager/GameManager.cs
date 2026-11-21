@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 // MANAGER REFERENCES
 	public InputManager InputManager { get; private set; }
 	public TimeManager TimeManager { get; private set; }
+	public SaveManager SaveManager { get; private set; }
 
 	// INIT SINGLETON & MANAGER REFERENCES
 	void Awake()
@@ -21,6 +22,8 @@ public class GameManager : MonoBehaviour
 				InputManager=GetComponent<InputManager>();
 			if(TimeManager==null)
 				TimeManager=GetComponent<TimeManager>();
+			if(SaveManager==null)
+				SaveManager=GetComponent<SaveManager>();
 		}
 		else
 			Destroy(gameObject);

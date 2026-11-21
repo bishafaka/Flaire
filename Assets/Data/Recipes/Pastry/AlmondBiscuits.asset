@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45c9207a518bfd4f949eec68bc2cbb9, type: 3}
   m_Name: AlmondBiscuits
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  recipeID: 0
+  recipeID: 510aae40e9
   recipeName:
     m_TableReference:
       m_TableCollectionName: GUID:ca9386bfde9d2bd43881facf06086b93
@@ -24,7 +24,7 @@ MonoBehaviour:
     m_LocalVariables: []
   recipePrice: 0
   recipeIcon: {fileID: 0}
-  recipePrefab: {fileID: 0}
+  recipePrefab: {fileID: 7754979759438018360, guid: ba98df21bd5f3a940a91590b346a5fcc, type: 3}
   recipeCategory: 1
   recipeRarity: 0
   references:

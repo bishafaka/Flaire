@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45c9207a518bfd4f949eec68bc2cbb9, type: 3}
   m_Name: Xuixo
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  recipeID: 0
+  recipeID: f99c03c7da
   recipeName:
     m_TableReference:
       m_TableCollectionName: GUID:ca9386bfde9d2bd43881facf06086b93
@@ -24,7 +24,7 @@ MonoBehaviour:
     m_LocalVariables: []
   recipePrice: 0
   recipeIcon: {fileID: 0}
-  recipePrefab: {fileID: 0}
+  recipePrefab: {fileID: 1527903186586438396, guid: b1733da05b4f25f44961fbd7379a4379, type: 3}
   recipeCategory: 1
   recipeRarity: 2
   references:

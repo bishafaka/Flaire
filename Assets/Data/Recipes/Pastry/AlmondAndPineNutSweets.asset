@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45c9207a518bfd4f949eec68bc2cbb9, type: 3}
   m_Name: AlmondAndPineNutSweets
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  recipeID: 0
+  recipeID: 7ccbb1d5fb
   recipeName:
     m_TableReference:
       m_TableCollectionName: GUID:ca9386bfde9d2bd43881facf06086b93
@@ -24,7 +24,7 @@ MonoBehaviour:
     m_LocalVariables: []
   recipePrice: 0
   recipeIcon: {fileID: 0}
-  recipePrefab: {fileID: 0}
+  recipePrefab: {fileID: 9157310744959408219, guid: 34ed34f5911181448aafc77d87de1b0e, type: 3}
   recipeCategory: 1
   recipeRarity: 3
   references:

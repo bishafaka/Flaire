@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45c9207a518bfd4f949eec68bc2cbb9, type: 3}
   m_Name: FineWheatBread
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  recipeID: 0
+  recipeID: a1966da304
   recipeName:
     m_TableReference:
       m_TableCollectionName: GUID:ca9386bfde9d2bd43881facf06086b93
@@ -24,7 +24,7 @@ MonoBehaviour:
     m_LocalVariables: []
   recipePrice: 0
   recipeIcon: {fileID: 0}
-  recipePrefab: {fileID: 0}
+  recipePrefab: {fileID: 5574776962088471959, guid: 1c3aa63a23b26404ea403f0d1106c3f3, type: 3}
   recipeCategory: 0
   recipeRarity: 0
   references:
