@@ -7,7 +7,7 @@ public class UIController : MonoBehaviour
 	[SerializeField] GameObject timePanel;
 	[SerializeField] TextMeshProUGUI timeText;
 	[SerializeField] GameObject mailboxPanel;
-	[SerializeField] LetterButton[] mailBoxLetters;
+	public LetterButton[] mailBoxLetters;
 	[SerializeField] GameObject letterPanel;
 	[SerializeField] TextMeshProUGUI letterText;
 	TimeManager timeManager;
@@ -41,6 +41,7 @@ public class UIController : MonoBehaviour
 			inputManager.pausePressed-=Pause;
 		}
 	}
+
 // UI TIME
 	void UpdateTime()
 	{
@@ -65,6 +66,17 @@ public class UIController : MonoBehaviour
 // UI MAILBOX
 	public void ShowMailbox()
 	{
+	// CHECKS THE RECIEVED LETTERS FROM SAVE DATA AND SHOWS THEM
+		SaveManager save=GameManager.Instance.SaveManager;
+		foreach(LetterButton letter in mailBoxLetters)
+		{
+			letter.gameObject.SetActive(false);
+			if(save.HasRecievedLetter(letter.letter))
+			{
+				letter.gameObject.transform.SetAsFirstSibling();
+				letter.gameObject.SetActive(true);
+			}
+		}
 		mailboxPanel.SetActive(true);
 		timePanel.SetActive(false);
 		inputManager.SetPlayerState(InputManager.PlayerState.UI);
