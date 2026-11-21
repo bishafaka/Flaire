@@ -6,7 +6,7 @@ public class TimeManager : MonoBehaviour
 // WORKING HOURS / MULTIPLIERS
 	const int INIT_DAY_HOUR=8;
 	const int END_DAY_HOUR=20;
-	const int FAST_FORWARD_MULTIPLIER=5;
+	const int FAST_FORWARD_MULTIPLIER=250;
 
 // DEBUG
 	[SerializeField] float debugTimeSpeed=1f;
@@ -58,21 +58,19 @@ public class TimeManager : MonoBehaviour
 		}
 	}
 
-// NEW DAY / FAST FORWARD
+// FAST FORWARD
+	public void FastForward()
+	{
+		if(isFastForward)
+			return;
+		timeMultiplier=FAST_FORWARD_MULTIPLIER;
+		isFastForward=true;
+		inputManager.SetPlayerState(InputManager.PlayerState.Cinematic);
+	}
+
+// NEW DAY
 	public void SetNewDay()
 	{
-	// FAST FORWARD
-		if(hour<END_DAY_HOUR)
-		{
-			if(isFastForward)
-				return;
-			timeMultiplier=FAST_FORWARD_MULTIPLIER;
-			isFastForward=true;
-			inputManager.SetPlayerState(InputManager.PlayerState.Cinematic);
-			return;
-		}
-
-	// NEW DAY
 		hour=INIT_DAY_HOUR;
 		minute=0;
 		timer=0;
