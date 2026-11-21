@@ -68,6 +68,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Mailbox
   type: 0
+  uiController: {fileID: 0}
+  allLetters:
+  - {fileID: 11400000, guid: 942fadc1639eb0740ae93a8baeae9787, type: 2}
+  - {fileID: 11400000, guid: 9be84495a033f89449354eea6dbc4c51, type: 2}
+  - {fileID: 11400000, guid: 176c1049c0f8e734ca5c69d223c32a8f, type: 2}
+  - {fileID: 11400000, guid: eccf525c0ab30254a8f31a2615e12f19, type: 2}
+  - {fileID: 11400000, guid: 881f74c8cb541bd46a8e78802734a7e6, type: 2}
+  - {fileID: 11400000, guid: c47454d37a3218844b3d9919f9910086, type: 2}
 --- !u!1 &1546463019994676569
 GameObject:
   m_ObjectHideFlags: 0
