@@ -52,6 +52,7 @@ public class TimeManager : MonoBehaviour
 		day++;
 		finishedShift=false;
 		OnDayChanged?.Invoke();
+		Debug.Log("New day!");
 	}
 
 // GETTERS
