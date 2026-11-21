@@ -59,7 +59,7 @@ public class InputManager : MonoBehaviour
 	void OnSprintCanceled(InputAction.CallbackContext ctx) => SprintReleased?.Invoke();
 	void OnPauseStarted(InputAction.CallbackContext ctx) => pausePressed?.Invoke();
 
-	// INIT & CLEANUP
+// INIT & CLEANUP
 	void Awake()
 	{
 		Inputs=new InputSystemActions();
