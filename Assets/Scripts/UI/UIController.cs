@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-// UI REFERENCES
+	// UI REFERENCES
 	[Header("TIME")]
 	[SerializeField] GameObject timePanel;
 	[SerializeField] TextMeshProUGUI timeText;
@@ -17,14 +17,14 @@ public class UIController : MonoBehaviour
 	[SerializeField] GameObject letterPanel;
 	[SerializeField] TextMeshProUGUI letterText;
 	[Header("LOADING")]
-	[SerializeField] GameObject loadingScreen;
-	[SerializeField] Slider progressBar;
+	[SerializeField] GameObject loadingPanel;
+	[SerializeField] Slider progressSlider;
 	[SerializeField] TMP_Text progressText;
 	TimeManager timeManager;
 	InputManager inputManager;
 	Letter currentLetter;
 
-// INIT & CLEANUP EVENT
+	// INIT & CLEANUP EVENT
 	void Start()
 	{
 		timeManager=GameManager.Instance.TimeManager;
@@ -38,7 +38,7 @@ public class UIController : MonoBehaviour
 		timeManager.OnDayChanged-=UpdateDay;
 	}
 
-// EVENT SUBSCRIPTION
+	// EVENT SUBSCRIPTION
 	void OnEnable()
 	{
 		inputManager=GameManager.Instance.InputManager;
@@ -55,7 +55,7 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-// UI TIME
+	// UI TIME
 	void UpdateTime()
 	{
 		timeText.text=$"{timeManager.GetHour():00} : {timeManager.GetMinute():00}";
@@ -65,7 +65,7 @@ public class UIController : MonoBehaviour
 		ChangeScene(0);
 	}
 
-// PAUSE PRESSED
+	// PAUSE PRESSED
 	void Pause()
 	{
 		if(letterPanel.activeSelf)
@@ -85,11 +85,11 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-// UI MAILBOX
+	// UI MAILBOX
 	public void ShowMailbox()
 	{
-	// CHECKS THE RECIEVED LETTERS FROM SAVE DATA AND SHOWS THEM
-		SaveManager save=GameManager.Instance.SaveManager;
+		// CHECKS THE RECIEVED LETTERS FROM SAVE DATA AND SHOWS THEM
+		SaveManager save = GameManager.Instance.SaveManager;
 		foreach(LetterButton letter in mailBoxLetters)
 		{
 			letter.gameObject.SetActive(false);
@@ -110,7 +110,7 @@ public class UIController : MonoBehaviour
 		inputManager.SetPlayerState(InputManager.PlayerState.Player);
 	}
 
-// UI LETTER
+	// UI LETTER
 	public void ShowLetter(Letter letter)
 	{
 		mailboxPanel.SetActive(false);
@@ -129,13 +129,13 @@ public class UIController : MonoBehaviour
 		currentLetter.LetterContent.StringChanged-=UpdateText;
 	}
 
-// UI SKIP PANEL
+	// UI SKIP PANEL
 	public void ShowSkipPanel()
 	{
 		skipDayPanel.SetActive(true);
 		inputManager.SetPlayerState(InputManager.PlayerState.UI);
 	}
-	public void HideSkipPanel(bool fastForward=false)
+	public void HideSkipPanel(bool fastForward = false)
 	{
 		skipDayPanel.SetActive(false);
 		if(fastForward)
@@ -147,19 +147,19 @@ public class UIController : MonoBehaviour
 			inputManager.SetPlayerState(InputManager.PlayerState.Player);
 	}
 
-// UI LOADING PANEL
+	// UI LOADING PANEL
 	public void ChangeScene(int sceneIndex)
 	{
 		StartCoroutine(LoadSceneAsync(sceneIndex));
 	}
 	IEnumerator LoadSceneAsync(int sceneIndex)
 	{
-		loadingScreen.SetActive(true);
-		AsyncOperation operation=SceneManager.LoadSceneAsync(sceneIndex);
+		loadingPanel.SetActive(true);
+		AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 		while(!operation.isDone)
 		{
-			float progress=Mathf.Clamp01(operation.progress/0.9f);
-			progressBar.value=progress;
+			float progress = Mathf.Clamp01(operation.progress/0.9f);
+			progressSlider.value=progress;
 			progressText.text=$"{Mathf.RoundToInt(progress*100)}%";
 			yield return new WaitForSeconds(1f);
 		}
