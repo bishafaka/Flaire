@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class Door : Interactable
 {
+// SCENE INDEX
+	[SerializeField] int sceneToTP=0;
+
 // REFERENCES
+	[SerializeField] bool isHouseDoor=false;
 	[SerializeField] UIController uiController;
 	TimeManager timeManager;
 
@@ -16,9 +20,14 @@ public class Door : Interactable
 	public override void Interact()
 	{
 		base.Interact();
-		if(timeManager.IsShiftFinished())
+		if(isHouseDoor)
+		{
 			timeManager.SetNewDay();
+			return;
+		}
+		if(timeManager.IsShiftFinished())
+			uiController.ChangeScene(sceneToTP);
 		else
-			uiController.ShowDoor();
+			uiController.ShowSkipPanel();
 	}
 }
