@@ -10,8 +10,10 @@ public class UIController : MonoBehaviour
 	public LetterButton[] mailBoxLetters;
 	[SerializeField] GameObject letterPanel;
 	[SerializeField] TextMeshProUGUI letterText;
+	[SerializeField] GameObject skipDayPanel;
 	TimeManager timeManager;
 	InputManager inputManager;
+	Letter currentLetter;
 
 // INIT & CLEANUP EVENT
 	void Start()
@@ -61,6 +63,11 @@ public class UIController : MonoBehaviour
 			HideMailbox();
 			return;
 		}
+		if(skipDayPanel.activeSelf)
+		{
+			HideDoor();
+			return;
+		}
 	}
 
 // UI MAILBOX
@@ -93,7 +100,8 @@ public class UIController : MonoBehaviour
 	{
 		mailboxPanel.SetActive(false);
 		letterPanel.SetActive(true);
-		letter.LetterContent.StringChanged+=UpdateText;
+		currentLetter=letter;
+		currentLetter.LetterContent.StringChanged+=UpdateText;
 	}
 	void UpdateText(string value)
 	{
@@ -103,5 +111,18 @@ public class UIController : MonoBehaviour
 	{
 		mailboxPanel.SetActive(true);
 		letterPanel.SetActive(false);
+		currentLetter.LetterContent.StringChanged-=UpdateText;
+	}
+
+// UI DOOR
+	public void ShowDoor()
+	{
+		skipDayPanel.SetActive(true);
+		inputManager.SetPlayerState(InputManager.PlayerState.UI);
+	}
+	public void HideDoor()
+	{
+		skipDayPanel.SetActive(false);
+		inputManager.SetPlayerState(InputManager.PlayerState.Player);
 	}
 }
