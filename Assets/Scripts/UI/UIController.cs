@@ -1,16 +1,25 @@
 using TMPro;
+using UnityEngine.SceneManagement;
 using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
 // UI REFERENCES
+	[Header("TIME")]
 	[SerializeField] GameObject timePanel;
 	[SerializeField] TextMeshProUGUI timeText;
+	[SerializeField] GameObject skipDayPanel;
+	[Header("MAIL")]
 	[SerializeField] GameObject mailboxPanel;
 	public LetterButton[] mailBoxLetters;
 	[SerializeField] GameObject letterPanel;
 	[SerializeField] TextMeshProUGUI letterText;
-	[SerializeField] GameObject skipDayPanel;
+	[Header("LOADING")]
+	[SerializeField] GameObject loadingScreen;
+	[SerializeField] Slider progressBar;
+	[SerializeField] TMP_Text progressText;
 	TimeManager timeManager;
 	InputManager inputManager;
 	Letter currentLetter;
@@ -20,11 +29,13 @@ public class UIController : MonoBehaviour
 	{
 		timeManager=GameManager.Instance.TimeManager;
 		timeManager.OnTimeChanged+=UpdateTime;
+		timeManager.OnDayChanged+=UpdateDay;
 		UpdateTime();
 	}
 	void OnDestroy()
 	{
 		timeManager.OnTimeChanged-=UpdateTime;
+		timeManager.OnDayChanged-=UpdateDay;
 	}
 
 // EVENT SUBSCRIPTION
@@ -49,6 +60,10 @@ public class UIController : MonoBehaviour
 	{
 		timeText.text=$"{timeManager.GetHour():00} : {timeManager.GetMinute():00}";
 	}
+	void UpdateDay()
+	{
+		ChangeScene(0);
+	}
 
 // PAUSE PRESSED
 	void Pause()
@@ -65,7 +80,7 @@ public class UIController : MonoBehaviour
 		}
 		if(skipDayPanel.activeSelf)
 		{
-			HideDoor();
+			HideSkipPanel();
 			return;
 		}
 	}
@@ -114,15 +129,39 @@ public class UIController : MonoBehaviour
 		currentLetter.LetterContent.StringChanged-=UpdateText;
 	}
 
-// UI DOOR
-	public void ShowDoor()
+// UI SKIP PANEL
+	public void ShowSkipPanel()
 	{
 		skipDayPanel.SetActive(true);
 		inputManager.SetPlayerState(InputManager.PlayerState.UI);
 	}
-	public void HideDoor()
+	public void HideSkipPanel(bool fastForward=false)
 	{
 		skipDayPanel.SetActive(false);
-		inputManager.SetPlayerState(InputManager.PlayerState.Player);
+		if(fastForward)
+		{
+			timeManager.FastForward();
+			inputManager.SetPlayerState(InputManager.PlayerState.Cinematic);
+		}
+		else
+			inputManager.SetPlayerState(InputManager.PlayerState.Player);
+	}
+
+// UI LOADING PANEL
+	public void ChangeScene(int sceneIndex)
+	{
+		StartCoroutine(LoadSceneAsync(sceneIndex));
+	}
+	IEnumerator LoadSceneAsync(int sceneIndex)
+	{
+		loadingScreen.SetActive(true);
+		AsyncOperation operation=SceneManager.LoadSceneAsync(sceneIndex);
+		while(!operation.isDone)
+		{
+			float progress=Mathf.Clamp01(operation.progress/0.9f);
+			progressBar.value=progress;
+			progressText.text=$"{Mathf.RoundToInt(progress*100)}%";
+			yield return new WaitForSeconds(1f);
+		}
 	}
 }
