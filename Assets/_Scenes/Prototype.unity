@@ -531,10 +531,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3970693361531324511, guid: 8113921cd2f08e54a98c05d56d8a892e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: HideMailbox
-      objectReference: {fileID: 0}
     - target: {fileID: 4827145139085232714, guid: 8113921cd2f08e54a98c05d56d8a892e, type: 3}
       propertyPath: m_Name
       value: Canvas
