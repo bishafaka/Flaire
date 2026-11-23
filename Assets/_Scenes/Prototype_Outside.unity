@@ -529,11 +529,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &615317490 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5188865144254062701, guid: 3fd53533dffe8b740995a2406f22ddba, type: 3}
-  m_PrefabInstance: {fileID: 1055478533}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &682508690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -863,6 +858,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fd53533dffe8b740995a2406f22ddba, type: 3}
+--- !u!4 &1055478534 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8978897580508845235, guid: 3fd53533dffe8b740995a2406f22ddba, type: 3}
+  m_PrefabInstance: {fileID: 1055478533}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1100072305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1117,7 +1117,7 @@ GameObject:
   - component: {fileID: 2076634695}
   - component: {fileID: 2076634697}
   m_Layer: 0
-  m_Name: CinemachineCamera
+  m_Name: Outside Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1143,7 +1143,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 615317490}
+    TrackingTarget: {fileID: 1055478534}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -1205,7 +1205,7 @@ MonoBehaviour:
       Size: {x: 1.32, y: 1}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
-  TargetOffset: {x: 0, y: 0, z: 0}
+  TargetOffset: {x: 0, y: 0.5, z: 0}
   Damping: {x: 0.25, y: 0.25, z: 0.25}
   Lookahead:
     Enabled: 0
