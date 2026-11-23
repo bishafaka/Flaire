@@ -11,13 +11,13 @@ public class Letter : ScriptableObject
 	[SerializeField] string letterID;
 	[SerializeField] LocalizedString letterSender;
 	[SerializeField] LocalizedString letterContent;
-	[SerializeField] Recipe recipe;
+	[SerializeField] Recipe[] recipe;
 
 // GETTERS
 	public string LetterID => letterID;
 	public LocalizedString LetterSender => letterSender;
 	public LocalizedString LetterContent => letterContent;
-	public Recipe Recipe => recipe;
+	public Recipe[] Recipe => recipe;
 
 // ID GENERATOR
 #if UNITY_EDITOR
