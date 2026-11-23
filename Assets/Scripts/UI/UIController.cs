@@ -20,6 +20,9 @@ public class UIController : MonoBehaviour
 	public LetterButton[] mailBoxLetters;
 	[SerializeField] GameObject letterPanel;
 	[SerializeField] TextMeshProUGUI letterText;
+	[SerializeField] GameObject letterPresent;
+	[SerializeField] GameObject recipeCardsPanel;
+	[SerializeField] GameObject[] recipeCards;
 	[Header("LOADING")]
 	[SerializeField] GameObject loadingPanel;
 	[SerializeField] Slider progressSlider;
@@ -124,6 +127,10 @@ public class UIController : MonoBehaviour
 		letterPanel.SetActive(true);
 		currentLetter=letter;
 		currentLetter.LetterContent.StringChanged+=UpdateText;
+		if(currentLetter.Recipe.Length<=0)
+			letterPresent.SetActive(false);
+		else
+			letterPresent.SetActive(true);
 	}
 	void UpdateText(string value)
 	{
@@ -134,6 +141,47 @@ public class UIController : MonoBehaviour
 		mailboxPanel.SetActive(true);
 		letterPanel.SetActive(false);
 		currentLetter.LetterContent.StringChanged-=UpdateText;
+	}
+	public void SelectPresent()
+	{
+		Recipe[] presentRecipe=currentLetter.Recipe;
+		ShowRecipeCards(presentRecipe);
+		HideLetter();
+	}
+
+// UI RECIPE CHOICES
+	void ShowRecipeCards(Recipe[] recipes)
+	{
+		foreach(GameObject choice in recipeCards)
+		{
+			choice.SetActive(false);
+		}
+		int[] positions;
+		switch(recipes.Length)
+		{
+			case 1:
+				positions=new int[] { 1 };
+				break;
+			case 2:
+				positions=new int[] { 0, 2 };
+				break;
+			default:
+				positions=new int[] { 0, 1, 2 };
+				break;
+		}
+		for(int i=0; i<recipes.Length; i++)
+		{
+			recipeCards[positions[i]].GetComponent<RecipeCard>().SetRecipe(recipes[i]);
+			recipeCards[positions[i]].SetActive(true);
+		}
+		recipeCardsPanel.SetActive(true);
+	}
+	public void HideRecipeCards()
+	{
+		SetCameraPriority(sceneCam);
+		recipeCardsPanel.SetActive(false);
+		timePanel.SetActive(true);
+		inputManager.SetPlayerState(InputManager.PlayerState.Player);
 	}
 
 // UI SKIP PANEL
