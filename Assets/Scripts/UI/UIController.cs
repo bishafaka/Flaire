@@ -9,8 +9,8 @@ public class UIController : MonoBehaviour
 {
 // UI REFERENCES
 	[Header("CAMERAS")]
-	CinemachineCamera sceneCam;
-	CinemachineCamera mailCam;
+	[SerializeField] CinemachineCamera sceneCam;
+	[SerializeField] CinemachineCamera mailCam;
 	[Header("TIME")]
 	[SerializeField] GameObject timePanel;
 	[SerializeField] TextMeshProUGUI timeText;
