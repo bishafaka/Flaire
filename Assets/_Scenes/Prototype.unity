@@ -280,7 +280,7 @@ MonoBehaviour:
     Enabled: 0
     DefaultMode: 2
   DefaultBlend:
-    Style: 1
+    Style: 0
     Time: 1
     CustomCurve:
       serializedVersion: 2
@@ -639,6 +639,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2969180364178802424, guid: 8113921cd2f08e54a98c05d56d8a892e, type: 3}
+      propertyPath: mailCam
+      value: 
+      objectReference: {fileID: 741648284}
+    - target: {fileID: 2969180364178802424, guid: 8113921cd2f08e54a98c05d56d8a892e, type: 3}
+      propertyPath: sceneCam
+      value: 
+      objectReference: {fileID: 1569113492}
     - target: {fileID: 4827145139085232714, guid: 8113921cd2f08e54a98c05d56d8a892e, type: 3}
       propertyPath: m_Name
       value: Canvas
