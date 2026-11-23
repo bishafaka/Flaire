@@ -3,10 +3,14 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using Unity.Cinemachine;
 
 public class UIController : MonoBehaviour
 {
 // UI REFERENCES
+	[Header("CAMERAS")]
+	CinemachineCamera sceneCam;
+	CinemachineCamera mailCam;
 	[Header("TIME")]
 	[SerializeField] GameObject timePanel;
 	[SerializeField] TextMeshProUGUI timeText;
@@ -27,6 +31,7 @@ public class UIController : MonoBehaviour
 // INIT & CLEANUP EVENT
 	void Start()
 	{
+		SetCameraPriority(sceneCam);
 		timeManager=GameManager.Instance.TimeManager;
 		timeManager.OnTimeChanged+=UpdateTime;
 		timeManager.OnDayChanged+=UpdateDay;
@@ -88,6 +93,7 @@ public class UIController : MonoBehaviour
 // UI MAILBOX
 	public void ShowMailbox()
 	{
+		SetCameraPriority(mailCam);
 	// CHECKS THE RECIEVED LETTERS FROM SAVE DATA AND SHOWS THEM
 		SaveManager save=GameManager.Instance.SaveManager;
 		foreach(LetterButton letter in mailBoxLetters)
@@ -105,6 +111,7 @@ public class UIController : MonoBehaviour
 	}
 	public void HideMailbox()
 	{
+		SetCameraPriority(sceneCam);
 		mailboxPanel.SetActive(false);
 		timePanel.SetActive(true);
 		inputManager.SetPlayerState(InputManager.PlayerState.Player);
@@ -163,5 +170,13 @@ public class UIController : MonoBehaviour
 			progressText.text=$"{Mathf.RoundToInt(progress*100)}%";
 			yield return new WaitForSeconds(1f);
 		}
+	}
+
+// CAMERA BEHAVIOUR
+	void SetCameraPriority(CinemachineCamera cam)
+	{
+		sceneCam.Priority=0;
+		mailCam.Priority=0;
+		cam.Priority=10;
 	}
 }
