@@ -3,10 +3,14 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using Unity.Cinemachine;
 
 public class UIController : MonoBehaviour
 {
 // UI REFERENCES
+	[Header("CAMERAS")]
+	[SerializeField] CinemachineCamera sceneCam;
+	[SerializeField] CinemachineCamera mailCam;
 	[Header("TIME")]
 	[SerializeField] GameObject timePanel;
 	[SerializeField] TextMeshProUGUI timeText;
@@ -16,9 +20,12 @@ public class UIController : MonoBehaviour
 	public LetterButton[] mailBoxLetters;
 	[SerializeField] GameObject letterPanel;
 	[SerializeField] TextMeshProUGUI letterText;
+	[SerializeField] GameObject letterPresent;
+	[SerializeField] GameObject recipeCardPanel;
+	[SerializeField] GameObject recipeCardImage;
 	[Header("LOADING")]
-	[SerializeField] GameObject loadingScreen;
-	[SerializeField] Slider progressBar;
+	[SerializeField] GameObject loadingPanel;
+	[SerializeField] Slider progressSlider;
 	[SerializeField] TMP_Text progressText;
 	TimeManager timeManager;
 	InputManager inputManager;
@@ -27,6 +34,7 @@ public class UIController : MonoBehaviour
 // INIT & CLEANUP EVENT
 	void Start()
 	{
+		SetCameraPriority(sceneCam);
 		timeManager=GameManager.Instance.TimeManager;
 		timeManager.OnTimeChanged+=UpdateTime;
 		timeManager.OnDayChanged+=UpdateDay;
@@ -68,6 +76,11 @@ public class UIController : MonoBehaviour
 // PAUSE PRESSED
 	void Pause()
 	{
+		if(recipeCardPanel.activeSelf)
+		{
+			HideRecipeCard();
+			return;
+		}
 		if(letterPanel.activeSelf)
 		{
 			HideLetter();
@@ -88,6 +101,7 @@ public class UIController : MonoBehaviour
 // UI MAILBOX
 	public void ShowMailbox()
 	{
+		SetCameraPriority(mailCam);
 	// CHECKS THE RECIEVED LETTERS FROM SAVE DATA AND SHOWS THEM
 		SaveManager save=GameManager.Instance.SaveManager;
 		foreach(LetterButton letter in mailBoxLetters)
@@ -105,6 +119,7 @@ public class UIController : MonoBehaviour
 	}
 	public void HideMailbox()
 	{
+		SetCameraPriority(sceneCam);
 		mailboxPanel.SetActive(false);
 		timePanel.SetActive(true);
 		inputManager.SetPlayerState(InputManager.PlayerState.Player);
@@ -117,16 +132,40 @@ public class UIController : MonoBehaviour
 		letterPanel.SetActive(true);
 		currentLetter=letter;
 		currentLetter.LetterContent.StringChanged+=UpdateText;
+		if(currentLetter.Recipe==null)
+			letterPresent.SetActive(false);
+		else
+			letterPresent.SetActive(true);
 	}
 	void UpdateText(string value)
 	{
 		letterText.text=value;
 	}
-	public void HideLetter()
+	public void HideLetter(bool showMailbox=true)
 	{
-		mailboxPanel.SetActive(true);
+		if(showMailbox)
+			mailboxPanel.SetActive(true);
 		letterPanel.SetActive(false);
 		currentLetter.LetterContent.StringChanged-=UpdateText;
+	}
+	public void SelectPresent()
+	{
+		Recipe presentRecipe=currentLetter.Recipe;
+		ShowRecipeCard(presentRecipe);
+	}
+
+// UI RECIPE CARD
+	void ShowRecipeCard(Recipe recipe)
+	{
+		HideLetter(false);
+		recipeCardPanel.SetActive(true);
+		recipeCardImage.GetComponent<UIDraggableCard>().InitCard(recipe);
+		GameManager.Instance.SaveManager.UnlockRecipe(recipe);
+	}
+	public void HideRecipeCard()
+	{
+		recipeCardPanel.SetActive(false);
+		ShowLetter(currentLetter);
 	}
 
 // UI SKIP PANEL
@@ -154,14 +193,22 @@ public class UIController : MonoBehaviour
 	}
 	IEnumerator LoadSceneAsync(int sceneIndex)
 	{
-		loadingScreen.SetActive(true);
+		loadingPanel.SetActive(true);
 		AsyncOperation operation=SceneManager.LoadSceneAsync(sceneIndex);
 		while(!operation.isDone)
 		{
 			float progress=Mathf.Clamp01(operation.progress/0.9f);
-			progressBar.value=progress;
+			progressSlider.value=progress;
 			progressText.text=$"{Mathf.RoundToInt(progress*100)}%";
 			yield return new WaitForSeconds(1f);
 		}
+	}
+
+// CAMERA BEHAVIOUR
+	void SetCameraPriority(CinemachineCamera cam)
+	{
+		sceneCam.Priority=0;
+		mailCam.Priority=0;
+		cam.Priority=10;
 	}
 }
