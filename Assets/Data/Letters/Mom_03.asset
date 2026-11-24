@@ -31,8 +31,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  recipe:
-  - {fileID: 11400000, guid: e90ffa97948e41a45ad2ee8de53bd956, type: 2}
+  recipe: {fileID: 11400000, guid: e90ffa97948e41a45ad2ee8de53bd956, type: 2}
   references:
     version: 2
     RefIds: []
