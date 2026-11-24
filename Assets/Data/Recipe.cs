@@ -8,25 +8,24 @@ using UnityEngine.Localization;
 public class Recipe : ScriptableObject
 {
 	public enum Category { Bread, Pastry, Cake, Cream }
-	public enum Rarity { Common, Rare, Legendary, Seasonal }
 
 // RECIPE DATA
 	[SerializeField] string recipeID;
 	[SerializeField] LocalizedString recipeName;
 	[SerializeField] int recipePrice;
-	[SerializeField] Sprite recipeIcon;
+	[SerializeField] Sprite recipeIconFront;
+	[SerializeField] Sprite recipeIconBack;
 	[SerializeField] GameObject recipePrefab;
 	[SerializeField] Category recipeCategory;
-	[SerializeField] Rarity recipeRarity;
 
 // GETTERS
 	public string RecipeID => recipeID;
 	public LocalizedString RecipeName => recipeName;
 	public int RecipePrice => recipePrice;
-	public Sprite RecipeIcon => recipeIcon;
+	public Sprite RecipeIconFront => recipeIconFront;
+	public Sprite RecipeIconBack => recipeIconBack;
 	public GameObject RecipePrefab => recipePrefab;
 	public Category RecipeCategory => recipeCategory;
-	public Rarity RecipeRarity => recipeRarity;
 
 // ID GENERATOR
 #if UNITY_EDITOR
