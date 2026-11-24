@@ -21,8 +21,8 @@ public class UIController : MonoBehaviour
 	[SerializeField] GameObject letterPanel;
 	[SerializeField] TextMeshProUGUI letterText;
 	[SerializeField] GameObject letterPresent;
-	[SerializeField] GameObject recipeCardsPanel;
-	[SerializeField] GameObject[] recipeCards;
+	[SerializeField] GameObject recipeCardPanel;
+	[SerializeField] GameObject recipeCardImage;
 	[Header("LOADING")]
 	[SerializeField] GameObject loadingPanel;
 	[SerializeField] Slider progressSlider;
@@ -76,6 +76,11 @@ public class UIController : MonoBehaviour
 // PAUSE PRESSED
 	void Pause()
 	{
+		if(recipeCardPanel.activeSelf)
+		{
+			HideRecipeCard();
+			return;
+		}
 		if(letterPanel.activeSelf)
 		{
 			HideLetter();
@@ -127,7 +132,7 @@ public class UIController : MonoBehaviour
 		letterPanel.SetActive(true);
 		currentLetter=letter;
 		currentLetter.LetterContent.StringChanged+=UpdateText;
-		if(currentLetter.Recipe.Length<=0)
+		if(currentLetter.Recipe==null)
 			letterPresent.SetActive(false);
 		else
 			letterPresent.SetActive(true);
@@ -136,52 +141,31 @@ public class UIController : MonoBehaviour
 	{
 		letterText.text=value;
 	}
-	public void HideLetter()
+	public void HideLetter(bool showMailbox=true)
 	{
-		mailboxPanel.SetActive(true);
+		if(showMailbox)
+			mailboxPanel.SetActive(true);
 		letterPanel.SetActive(false);
 		currentLetter.LetterContent.StringChanged-=UpdateText;
 	}
 	public void SelectPresent()
 	{
-		Recipe[] presentRecipe=currentLetter.Recipe;
-		ShowRecipeCards(presentRecipe);
-		HideLetter();
+		Recipe presentRecipe=currentLetter.Recipe;
+		ShowRecipeCard(presentRecipe);
 	}
 
-// UI RECIPE CHOICES
-	void ShowRecipeCards(Recipe[] recipes)
+// UI RECIPE CARD
+	void ShowRecipeCard(Recipe recipe)
 	{
-		foreach(GameObject choice in recipeCards)
-		{
-			choice.SetActive(false);
-		}
-		int[] positions;
-		switch(recipes.Length)
-		{
-			case 1:
-				positions=new int[] { 1 };
-				break;
-			case 2:
-				positions=new int[] { 0, 2 };
-				break;
-			default:
-				positions=new int[] { 0, 1, 2 };
-				break;
-		}
-		for(int i=0; i<recipes.Length; i++)
-		{
-			recipeCards[positions[i]].GetComponent<RecipeCard>().SetRecipe(recipes[i]);
-			recipeCards[positions[i]].SetActive(true);
-		}
-		recipeCardsPanel.SetActive(true);
+		HideLetter(false);
+		recipeCardPanel.SetActive(true);
+		recipeCardImage.GetComponent<UIDraggableCard>().InitCard(recipe);
+		GameManager.Instance.SaveManager.UnlockRecipe(recipe);
 	}
-	public void HideRecipeCards()
+	public void HideRecipeCard()
 	{
-		SetCameraPriority(sceneCam);
-		recipeCardsPanel.SetActive(false);
-		timePanel.SetActive(true);
-		inputManager.SetPlayerState(InputManager.PlayerState.Player);
+		recipeCardPanel.SetActive(false);
+		ShowLetter(currentLetter);
 	}
 
 // UI SKIP PANEL
