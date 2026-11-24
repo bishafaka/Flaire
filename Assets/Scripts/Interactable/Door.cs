@@ -23,6 +23,7 @@ public class Door : Interactable
 		if(isHouseDoor)
 		{
 			timeManager.SetNewDay();
+			uiController.ChangeScene(sceneToTP);
 			return;
 		}
 		if(timeManager.IsShiftFinished())
