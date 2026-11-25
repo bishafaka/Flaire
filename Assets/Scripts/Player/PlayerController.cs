@@ -16,11 +16,11 @@ public class PlayerController : MonoBehaviour
 	GameObject currentInteractable=null;
 	Interactable currentInteractableScript=null;
 	GameObject heldObject;
-	BakeryItem heldItem;
+	Food heldFood;
 
 // GETTERS
 	public bool IsHoldingSomething => heldObject!=null;
-	public BakeryItem HeldItem => heldItem;
+	public Food HeldItem => heldFood;
 
 // INIT REFERENCES & CLEANUP
 	void Awake()
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
 	}
 
 // PICK UP INGREDIENTS FROM STORAGE
-	public bool PickUpRecipe(Recipe recipe, BakeryItem.Stage stage=BakeryItem.Stage.Ingredients)
+	public bool PickUpRecipe(Recipe recipe, Food.Stage stage=Food.Stage.Ingredients)
 	{
 		if(IsHoldingSomething || recipe==null)
 			return false;
@@ -93,14 +93,14 @@ public class PlayerController : MonoBehaviour
 
 	// INIT RECIPE PREFAB
 		heldObject=Instantiate(recipe.RecipePrefab, handPosition.position, handPosition.rotation, handPosition);
-		heldItem=heldObject.GetComponent<BakeryItem>();
-		if(heldItem==null)
+		heldFood=heldObject.GetComponent<Food>();
+		if(heldFood==null)
 		{
 			Destroy(heldObject);
 			heldObject=null;
 			return false;
 		}
-		heldItem.Init(recipe, stage);
+		heldFood.Init(recipe, stage);
 		return true;
 	}
 
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 			return null;
 		GameObject item=heldObject;
 		heldObject=null;
-		heldItem=null;
+		heldFood=null;
 		item.transform.SetParent(null);
 		return item;
 	}
@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
 		if(heldObject!=null)
 			Destroy(heldObject);
 		heldObject=null;
-		heldItem=null;
+		heldFood=null;
 	}
 
 // TRIGGER SET INTERACTABLE
