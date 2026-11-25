@@ -115,16 +115,29 @@ public class UIController : MonoBehaviour
 		SetCameraPriority(mailCam);
 	// CHECKS THE RECIEVED LETTERS FROM SAVE DATA AND SHOWS THEM
 		SaveManager save=GameManager.Instance.SaveManager;
+	// UNREAD LETTERS FIRST
 		foreach(Letter letter in save.ReceivedLetters)
 		{
-			GameObject mailLetter=Instantiate(letterPrefab, mailboxContent);
-			mailLetter.GetComponent<LetterButton>().Init(letter, this);
+			if(!save.HasReadLetter(letter))
+			{
+				GameObject mailLetter=Instantiate(letterPrefab, mailboxContent);
+				mailLetter.GetComponent<LetterButton>().Init(letter, this);
+			}
+		}
+	// READ LETTERS AFTER
+		foreach(Letter letter in save.ReceivedLetters)
+		{
+			if(save.HasReadLetter(letter))
+			{
+				GameObject mailLetter=Instantiate(letterPrefab, mailboxContent);
+				mailLetter.GetComponent<LetterButton>().Init(letter, this);
+			}
 		}
 		mailboxPanel.SetActive(true);
 		timePanel.SetActive(false);
 		inputManager.SetPlayerState(InputManager.PlayerState.UI);
 	}
-	public void HideMailbox()
+	public void HideMailbox(bool backToPlayer=true)
 	{
 		SetCameraPriority(sceneCam);
 	// DELETES ALL CHILDREN FROM CONTENT
@@ -132,12 +145,15 @@ public class UIController : MonoBehaviour
 			Destroy(child.gameObject);
 		mailboxPanel.SetActive(false);
 		timePanel.SetActive(true);
-		inputManager.SetPlayerState(InputManager.PlayerState.Player);
+		if(backToPlayer)
+			inputManager.SetPlayerState(InputManager.PlayerState.Player);
 	}
 
 // UI LETTER
 	public void ShowLetter(Letter letter)
 	{
+		GameManager.Instance.SaveManager.MarkLetterAsRead(letter);
+		HideMailbox(false);
 		mailboxPanel.SetActive(false);
 		letterPanel.SetActive(true);
 		currentLetter=letter;
@@ -154,7 +170,7 @@ public class UIController : MonoBehaviour
 	public void HideLetter(bool showMailbox=true)
 	{
 		if(showMailbox)
-			mailboxPanel.SetActive(true);
+			ShowMailbox();
 		letterPanel.SetActive(false);
 		currentLetter.LetterContent.StringChanged-=UpdateText;
 	}
@@ -243,7 +259,11 @@ public class UIController : MonoBehaviour
 // CAMERA BEHAVIOUR
 	void SetCameraPriority(CinemachineCamera cam)
 	{
+		if(sceneCam==null)
+			return;
 		sceneCam.Priority=0;
+		if(mailCam==null)
+			return;
 		mailCam.Priority=0;
 		cam.Priority=10;
 	}
