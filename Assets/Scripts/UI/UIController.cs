@@ -139,14 +139,16 @@ public class UIController : MonoBehaviour
 	}
 	public void HideMailbox(bool backToPlayer=true)
 	{
-		SetCameraPriority(sceneCam);
 	// DELETES ALL CHILDREN FROM CONTENT
 		foreach(Transform child in mailboxContent)
 			Destroy(child.gameObject);
 		mailboxPanel.SetActive(false);
-		timePanel.SetActive(true);
 		if(backToPlayer)
+		{
+			timePanel.SetActive(true);
+			SetCameraPriority(sceneCam);
 			inputManager.SetPlayerState(InputManager.PlayerState.Player);
+		}
 	}
 
 // UI LETTER
