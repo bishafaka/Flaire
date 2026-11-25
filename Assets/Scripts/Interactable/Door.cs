@@ -9,6 +9,8 @@ public class Door : Interactable
 	[SerializeField] bool isHouseDoor=false;
 	[SerializeField] UIController uiController;
 	TimeManager timeManager;
+// FLAGS
+	bool hasBeenUsed=false;
 
 // INIT
 	void Start()
@@ -22,6 +24,9 @@ public class Door : Interactable
 		base.Interact();
 		if(isHouseDoor)
 		{
+			if(hasBeenUsed)
+				return;
+			hasBeenUsed=true;
 			timeManager.SetNewDay();
 			uiController.ChangeScene(sceneToTP);
 			return;
