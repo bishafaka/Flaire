@@ -1,9 +1,9 @@
-using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 using Unity.Cinemachine;
+using UnityEngine.UI;
+using UnityEngine;
+using TMPro;
 
 public class UIController : MonoBehaviour
 {
@@ -17,12 +17,18 @@ public class UIController : MonoBehaviour
 	[SerializeField] GameObject skipDayPanel;
 	[Header("MAIL")]
 	[SerializeField] GameObject mailboxPanel;
-	public LetterButton[] mailBoxLetters;
+	[SerializeField] Transform mailboxContent;
+	[SerializeField] GameObject letterPrefab;
+	[Header("LETTER")]
 	[SerializeField] GameObject letterPanel;
 	[SerializeField] TextMeshProUGUI letterText;
 	[SerializeField] GameObject letterPresent;
-	[SerializeField] GameObject recipeCardPanel;
-	[SerializeField] GameObject recipeCardImage;
+	[SerializeField] GameObject cardPanel;
+	[SerializeField] GameObject cardImage;
+	[Header("RECIPES")]
+	[SerializeField] GameObject recipesPanel;
+	[SerializeField] Transform recipesContent;
+	[SerializeField] GameObject recipesCardPrefab;
 	[Header("LOADING")]
 	[SerializeField] GameObject loadingPanel;
 	[SerializeField] Slider progressSlider;
@@ -76,7 +82,12 @@ public class UIController : MonoBehaviour
 // PAUSE PRESSED
 	void Pause()
 	{
-		if(recipeCardPanel.activeSelf)
+		if(recipesPanel.activeSelf)
+		{
+			HideRecipes();
+			return;
+		}
+		if(cardPanel.activeSelf)
 		{
 			HideRecipeCard();
 			return;
@@ -104,14 +115,10 @@ public class UIController : MonoBehaviour
 		SetCameraPriority(mailCam);
 	// CHECKS THE RECIEVED LETTERS FROM SAVE DATA AND SHOWS THEM
 		SaveManager save=GameManager.Instance.SaveManager;
-		foreach(LetterButton letter in mailBoxLetters)
+		foreach(Letter letter in save.ReceivedLetters)
 		{
-			letter.gameObject.SetActive(false);
-			if(save.HasRecievedLetter(letter.letter))
-			{
-				letter.gameObject.transform.SetAsFirstSibling();
-				letter.gameObject.SetActive(true);
-			}
+			GameObject mailLetter=Instantiate(letterPrefab, mailboxContent);
+			mailLetter.GetComponent<LetterButton>().Init(letter, this);
 		}
 		mailboxPanel.SetActive(true);
 		timePanel.SetActive(false);
@@ -120,6 +127,9 @@ public class UIController : MonoBehaviour
 	public void HideMailbox()
 	{
 		SetCameraPriority(sceneCam);
+	// DELETES ALL CHILDREN FROM CONTENT
+		foreach(Transform child in mailboxContent)
+			Destroy(child.gameObject);
 		mailboxPanel.SetActive(false);
 		timePanel.SetActive(true);
 		inputManager.SetPlayerState(InputManager.PlayerState.Player);
@@ -158,14 +168,40 @@ public class UIController : MonoBehaviour
 	void ShowRecipeCard(Recipe recipe)
 	{
 		HideLetter(false);
-		recipeCardPanel.SetActive(true);
-		recipeCardImage.GetComponent<UIDraggableCard>().InitCard(recipe);
+		cardPanel.SetActive(true);
+		cardImage.GetComponent<UIDraggableCard>().InitCard(recipe);
 		GameManager.Instance.SaveManager.UnlockRecipe(recipe);
 	}
 	public void HideRecipeCard()
 	{
-		recipeCardPanel.SetActive(false);
+		cardPanel.SetActive(false);
 		ShowLetter(currentLetter);
+	}
+
+// UI RECIPES
+	public void ShowRecipes()
+	{
+		SetCameraPriority(mailCam);
+	// CHECKS THE RECIEVED RECIPES FROM SAVE DATA
+		SaveManager save=GameManager.Instance.SaveManager;
+		foreach(Recipe recipe in save.UnlockedRecipes)
+		{
+			GameObject card=Instantiate(recipesCardPrefab, recipesContent);
+			card.GetComponent<CardButton>().Init(recipe, this);
+		}
+		recipesPanel.SetActive(true);
+		timePanel.SetActive(false);
+		inputManager.SetPlayerState(InputManager.PlayerState.UI);
+	}
+	public void HideRecipes()
+	{
+		SetCameraPriority(sceneCam);
+	// DELETES ALL CHILDREN FROM CONTENT
+		foreach(Transform child in recipesContent)
+			Destroy(child.gameObject);
+		recipesPanel.SetActive(false);
+		timePanel.SetActive(true);
+		inputManager.SetPlayerState(InputManager.PlayerState.Player);
 	}
 
 // UI SKIP PANEL
