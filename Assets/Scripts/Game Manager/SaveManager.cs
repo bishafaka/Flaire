@@ -20,13 +20,20 @@ public class SaveManager : MonoBehaviour
 // SAVE DATA
 	SaveData saveData=new SaveData();
 
+// CACHED LISTS
+	List<Recipe> unlockedRecipes=new List<Recipe>();
+	List<Letter> receivedLetters=new List<Letter>();
+	List<Letter> readLetters=new List<Letter>();
+
+// GETTERS
+	public List<Recipe> UnlockedRecipes => unlockedRecipes;
+	public List<Letter> ReceivedLetters => receivedLetters;
+	public List<Letter> ReadLetters => readLetters;
+
 // PATH TO SAVE DATA
 	string SavePath => Path.Combine(Application.persistentDataPath, "saveData.json");
 
-// EVENTS
-	public event Action OnSaveDataChanged;
-
-// ALL DATA 
+// ALL DATA
 	public List<Letter> allLetters=new List<Letter>();
 	public List<Recipe> allRecipes=new List<Recipe>();
 
@@ -34,13 +41,15 @@ public class SaveManager : MonoBehaviour
 	void Awake()
 	{
 		LoadGame();
-	// REMOVES LETTERS ALREADY SEEN FROM SAVE DATA
-		for(int i=allLetters.Count-1; i>=0; i--)
-		{
-			if(HasRecievedLetter(allLetters[i]))
-				allLetters.RemoveAt(i);
-		}
 		Debug.Log(Application.persistentDataPath);
+	}
+
+// REFRESH LISTS
+	void RefreshProgressionLists()
+	{
+		unlockedRecipes=allRecipes.FindAll(IsRecipeUnlocked);
+		receivedLetters=allLetters.FindAll(HasRecievedLetter);
+		readLetters=allLetters.FindAll(HasReadLetter);
 	}
 
 // RECIPE PROGRESSION
@@ -50,44 +59,54 @@ public class SaveManager : MonoBehaviour
 	}
 	public void UnlockRecipe(Recipe recipe)
 	{
+		if(recipe==null)
+			return;
 		string id=recipe.RecipeID;
 		if(saveData.unlockedRecipes.Contains(id))
 			return;
 		saveData.unlockedRecipes.Add(id);
 		SaveGame();
-		OnSaveDataChanged?.Invoke();
+		RefreshProgressionLists();
 	}
 
 // RECIPE COUNT
-	public int UnlockedRecipeCount => saveData.unlockedRecipes.Count;
+	public int UnlockedRecipeCount => unlockedRecipes.Count;
 
 // LETTER PROGRESSION
 	public bool HasRecievedLetter(Letter letter)
 	{
-		return letter!=null&&saveData.recievedLetters.Contains(letter.LetterID);
+		return letter!=null && saveData.recievedLetters.Contains(letter.LetterID);
 	}
 	public void RecieveLetter(Letter letter)
 	{
+		if(letter==null)
+			return;
 		string id=letter.LetterID;
 		if(saveData.recievedLetters.Contains(id))
 			return;
 		saveData.recievedLetters.Add(id);
 		SaveGame();
-		OnSaveDataChanged?.Invoke();
+		RefreshProgressionLists();
+	}
+	public bool HasReadLetter(Letter letter)
+	{
+		return letter!=null && saveData.readLetters.Contains(letter.LetterID);
 	}
 	public void MarkLetterAsRead(Letter letter)
 	{
+		if(!HasRecievedLetter(letter))
+			return;
 		string id=letter.LetterID;
 		if(saveData.readLetters.Contains(id))
 			return;
 		saveData.readLetters.Add(id);
 		SaveGame();
-		OnSaveDataChanged?.Invoke();
+		RefreshProgressionLists();
 	}
 
 // LETTER COUNT
-	public int RecievedLetterCount => saveData.recievedLetters.Count;
-	public int ReadLetterCount => saveData.readLetters.Count;
+	public int RecievedLetterCount => receivedLetters.Count;
+	public int ReadLetterCount => readLetters.Count;
 	public int UnreadLetterCount => RecievedLetterCount-ReadLetterCount;
 
 // SAVE GAME
@@ -99,16 +118,17 @@ public class SaveManager : MonoBehaviour
 			File.WriteAllText(SavePath, json);
 			Debug.Log("Game saved!");
 		}
-		catch(Exception exception){ Debug.LogError($"Failed save: {exception.Message}"); }
+		catch(Exception exception) { Debug.LogError($"Failed save: {exception.Message}"); }
 	}
 
-// LOAD GAME
+	// LOAD GAME
 	public void LoadGame()
 	{
 		if(!File.Exists(SavePath))
 		{
 			saveData=new SaveData();
 			SaveGame();
+			RefreshProgressionLists();
 			return;
 		}
 		try
@@ -119,13 +139,14 @@ public class SaveManager : MonoBehaviour
 			saveData.unlockedRecipes??=new List<string>();
 			saveData.recievedLetters??=new List<string>();
 			saveData.readLetters??=new List<string>();
-			OnSaveDataChanged?.Invoke();
+			RefreshProgressionLists();
 			Debug.Log("Game loaded!");
 		}
 		catch(Exception exception)
 		{
 			Debug.LogError($"Failed load: {exception.Message}");
 			saveData=new SaveData();
+			RefreshProgressionLists();
 		}
 	}
 
@@ -135,7 +156,7 @@ public class SaveManager : MonoBehaviour
 		if(pause)
 			SaveGame();
 	}
-	public void OnApplicationQuit()
+	void OnApplicationQuit()
 	{
 		SaveGame();
 	}
