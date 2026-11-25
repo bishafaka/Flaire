@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[DefaultExecutionOrder(-25)]
 public class TimeManager : MonoBehaviour
 {
 // WORKING HOURS / MULTIPLIERS
@@ -21,6 +22,7 @@ public class TimeManager : MonoBehaviour
 	bool finishedShift=false;
 	bool isFastForward=false;
 	int timeMultiplier=1;
+	bool isSettingNewDay=false;
 
 // REFERENCES
 	InputManager inputManager;
@@ -28,7 +30,13 @@ public class TimeManager : MonoBehaviour
 // INIT
 	void Awake()
 	{
-		inputManager=GameManager.Instance.InputManager;
+		GameManager gameManager=GetComponent<GameManager>();
+		if(gameManager==null || GameManager.Instance!=gameManager)
+		{
+			enabled=false;
+			return;
+		}
+		inputManager=gameManager.InputManager;
 	}
 
 // UPDATE TIMER

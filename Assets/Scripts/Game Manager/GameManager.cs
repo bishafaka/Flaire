@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [DefaultExecutionOrder(-50)]
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
 // INIT SINGLETON & MANAGER REFERENCES
 	void Awake()
 	{
-		if(Instance!=null&&Instance!=this)
+		if(Instance!=null && Instance!=this)
 		{
 			Destroy(gameObject);
 			return;
@@ -33,30 +34,35 @@ public class GameManager : MonoBehaviour
 		SaveManager=GetComponent<SaveManager>();
 	}
 
-	// SUBSCRIBE TO EVENTS
+// SUBSCRIBE TO EVENTS
 	void OnEnable()
 	{
-		if(TimeManager!=null)
-			TimeManager.OnDayChanged+=LetterGamble;
+		if(Instance!=this || TimeManager==null)
+			return;
+		TimeManager.OnDayChanged-=LetterGamble;
+		TimeManager.OnDayChanged+=LetterGamble;
 	}
 	void OnDisable()
 	{
-		if(TimeManager!=null)
-			TimeManager.OnDayChanged-=LetterGamble;
+		if(TimeManager==null)
+			return;
+		TimeManager.OnDayChanged-=LetterGamble;
 	}
 
 // DAY UPDATE NEW MAIL RECIEVE
 	void LetterGamble()
 	{
-		if(SaveManager.allLetters.Count<=0)
+		if(Instance!=this || SaveManager==null || TimeManager==null)
+			return;
+		List<Letter> availableLetters=SaveManager.allLetters.FindAll(letter => !SaveManager.HasRecievedLetter(letter));
+		if(availableLetters.Count==0)
 			return;
 		int random=Random.Range(0, MAX_CHANCE);
 		if(random<currentChance)
 		{
 		// IF MAIL IS RECIEVED, RESETS CHANCE TO THE DEFAULT
-			int index=Random.Range(0, SaveManager.allLetters.Count);
-			SaveManager.RecieveLetter(SaveManager.allLetters[index]);
-			SaveManager.allLetters.RemoveAt(index);
+			int index=Random.Range(0, availableLetters.Count);
+			SaveManager.RecieveLetter(availableLetters[index]);
 			currentChance=DEFAULT_CHANCE;
 			Debug.Log("New mail!");
 		}
