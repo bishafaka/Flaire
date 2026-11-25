@@ -10,11 +10,11 @@ public class Oven : Interactable
 		playerController=PlayerController.Instance;
 		if(!playerController.IsHoldingSomething)
 			return;
-		BakeryItem item=playerController.HeldItem;
+		Food item=playerController.HeldItem;
 		if(item==null)
 			return;
-		if(item.CurrentStage!=BakeryItem.Stage.Raw)
+		if(item.CurrentStage!=Food.Stage.Raw)
 			return;
-		item.SetStage(BakeryItem.Stage.Product);
+		item.SetStage(Food.Stage.Cooked);
 	}
 }

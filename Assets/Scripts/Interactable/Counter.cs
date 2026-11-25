@@ -10,11 +10,11 @@ public class Counter : Interactable
 		playerController=PlayerController.Instance;
 		if(!playerController.IsHoldingSomething)
 			return;
-		BakeryItem item=playerController.HeldItem;
+		Food item=playerController.HeldItem;
 		if(item==null)
 			return;
-		if(item.CurrentStage!=BakeryItem.Stage.Ingredients)
+		if(item.CurrentStage!=Food.Stage.Ingredients)
 			return;
-		item.SetStage(BakeryItem.Stage.Raw);
+		item.SetStage(Food.Stage.Raw);
 	}
 }

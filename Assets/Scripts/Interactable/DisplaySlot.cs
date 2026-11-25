@@ -17,8 +17,8 @@ public class DisplaySlot : Interactable
 		{
 			if(IsOccupied)
 				return;
-			BakeryItem item=playerController.HeldItem;
-			if(item==null||item.CurrentStage!=BakeryItem.Stage.Product)
+			Food item=playerController.HeldItem;
+			if(item==null||item.CurrentStage!=Food.Stage.Cooked)
 				return;
 			GameObject product=playerController.DisplayHeldRecipe();
 			if(product==null)
@@ -32,8 +32,8 @@ public class DisplaySlot : Interactable
 		{
 			if(!IsOccupied)
 				return;
-			BakeryItem item=displayedProduct.GetComponent<BakeryItem>();
-			bool hasProductBeenPicked=playerController.PickUpRecipe(item.Recipe, BakeryItem.Stage.Product);
+			Food item=displayedProduct.GetComponent<Food>();
+			bool hasProductBeenPicked=playerController.PickUpRecipe(item.Recipe, Food.Stage.Cooked);
 			if(!hasProductBeenPicked)
 				return;
 			Destroy(displayedProduct);
