@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+	public static PlayerController Instance { get; private set; }
+
 // PLAYER MOVEMENT
 	const float SPEED=5.0f;
 	const float SPRINT_MULTIPLIER=1.5f;
@@ -10,13 +12,26 @@ public class PlayerController : MonoBehaviour
 	Vector2 dir;
 
 // PLAYER INTERACT
+	[SerializeField] Transform handPosition;
 	GameObject currentInteractable=null;
 	Interactable currentInteractableScript=null;
+	GameObject heldObject;
+	BakeryItem heldItem;
 
-	// INIT REFERENCES
+// GETTERS
+	public bool IsHoldingSomething => heldObject!=null;
+	public BakeryItem HeldItem => heldItem;
+
+// INIT REFERENCES & CLEANUP
 	void Awake()
 	{
+		Instance=this;
 		characterController=GetComponent<CharacterController>();
+	}
+	void OnDestroy()
+	{
+		if(Instance==this)
+			Instance=null;
 	}
 
 // EVENT SUBSCRIPTION
@@ -58,6 +73,7 @@ public class PlayerController : MonoBehaviour
 	void OnSprintPressed() => isSprint=true;
 	void OnSprintReleased() => isSprint=false;
 
+// PLAYER INTERACTION
 	void Interact()
 	{
 		if(currentInteractable==null)
@@ -65,6 +81,48 @@ public class PlayerController : MonoBehaviour
 		if(currentInteractableScript==null)
 			return;
 		currentInteractableScript.Interact();
+	}
+
+// PICK UP INGREDIENTS FROM STORAGE
+	public bool PickUpRecipe(Recipe recipe, BakeryItem.Stage stage=BakeryItem.Stage.Ingredients)
+	{
+		if(IsHoldingSomething || recipe==null)
+			return false;
+		if(recipe.RecipePrefab==null || handPosition==null)
+			return false;
+
+	// INIT RECIPE PREFAB
+		heldObject=Instantiate(recipe.RecipePrefab, handPosition.position, handPosition.rotation, handPosition);
+		heldItem=heldObject.GetComponent<BakeryItem>();
+		if(heldItem==null)
+		{
+			Destroy(heldObject);
+			heldObject=null;
+			return false;
+		}
+		heldItem.Init(recipe, stage);
+		return true;
+	}
+
+// DISPLAYS RECIPE AND CLEANUP
+	public GameObject DisplayHeldRecipe()
+	{
+		if(!IsHoldingSomething)
+			return null;
+		GameObject item=heldObject;
+		heldObject=null;
+		heldItem=null;
+		item.transform.SetParent(null);
+		return item;
+	}
+
+// CLEAR HANDS
+	public void ClearHands()
+	{
+		if(heldObject!=null)
+			Destroy(heldObject);
+		heldObject=null;
+		heldItem=null;
 	}
 
 // TRIGGER SET INTERACTABLE
