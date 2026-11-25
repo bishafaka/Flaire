@@ -15,6 +15,7 @@ public class SaveData
 	public List<string> readLetters=new List<string>();
 }
 
+[DefaultExecutionOrder(-25)]
 public class SaveManager : MonoBehaviour
 {
 // SAVE DATA
@@ -40,6 +41,12 @@ public class SaveManager : MonoBehaviour
 // INIT
 	void Awake()
 	{
+		GameManager gameManager=GetComponent<GameManager>();
+		if(gameManager==null || GameManager.Instance!=gameManager)
+		{
+			enabled=false;
+			return;
+		}
 		LoadGame();
 		Debug.Log(Application.persistentDataPath);
 	}
@@ -47,12 +54,38 @@ public class SaveManager : MonoBehaviour
 // REFRESH LISTS
 	void RefreshProgressionLists()
 	{
-		unlockedRecipes=allRecipes.FindAll(IsRecipeUnlocked);
-		receivedLetters=allLetters.FindAll(HasRecievedLetter);
-		readLetters=allLetters.FindAll(HasReadLetter);
+	// UNLOCKED RECIPES
+		unlockedRecipes=new List<Recipe>();
+		foreach(string id in saveData.unlockedRecipes)
+		{
+			Recipe recipe=allRecipes.Find(r => r!=null && r.RecipeID==id);
+			if(recipe!=null)
+				unlockedRecipes.Add(recipe);
+		}
+		unlockedRecipes.Reverse();
+
+	// RECEIVED LETTERS
+		receivedLetters=new List<Letter>();
+		foreach(string id in saveData.recievedLetters)
+		{
+			Letter letter=allLetters.Find(l => l!=null && l.LetterID==id);
+			if(letter!=null)
+				receivedLetters.Add(letter);
+		}
+		receivedLetters.Reverse();
+
+	// READ LETTERS
+		readLetters=new List<Letter>();
+		foreach(string id in saveData.readLetters)
+		{
+			Letter letter=allLetters.Find(l => l!=null && l.LetterID==id);
+			if(letter!=null)
+				readLetters.Add(letter);
+		}
+		readLetters.Reverse();
 	}
 
-// RECIPE PROGRESSION
+	// RECIPE PROGRESSION
 	public bool IsRecipeUnlocked(Recipe recipe)
 	{
 		return recipe!=null && saveData.unlockedRecipes.Contains(recipe.RecipeID);

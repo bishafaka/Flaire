@@ -7,12 +7,7 @@ public class InputManager : MonoBehaviour
 {
 // INPUT SYSTEM
 	InputSystemActions Inputs;
-	public enum PlayerState
-	{
-		UI,
-		Player,
-		Cinematic
-	}
+	public enum PlayerState { UI, Player, Cinematic }
 	[SerializeField] PlayerState CurrentPlayerState=PlayerState.UI;
 
 // INPUT EVENTS
@@ -39,6 +34,8 @@ public class InputManager : MonoBehaviour
 	}
 	void UnregisterEvent()
 	{
+		if(Inputs==null)
+			return;
 		Inputs.Player.Move.performed-=OnMove;
 		Inputs.Player.Move.canceled-=OnMove;
 		Inputs.Player.Look.performed-=OnLook;
@@ -62,14 +59,24 @@ public class InputManager : MonoBehaviour
 // INIT & CLEANUP
 	void Awake()
 	{
+		GameManager gameManager=GetComponent<GameManager>();
+		if(gameManager==null || GameManager.Instance!=gameManager)
+		{
+			enabled=false;
+			return;
+		}
 		Inputs=new InputSystemActions();
 		RegisterEvent();
 		UpdatePlayerState();
 	}
 	void OnDestroy()
 	{
+		if(Inputs==null)
+			return;
 		UnregisterEvent();
 		Inputs.Disable();
+		Inputs.Dispose();
+		Inputs=null;
 	}
 
 //PLAYER STATE MANAGEMENT
