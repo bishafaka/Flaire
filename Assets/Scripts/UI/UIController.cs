@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour
 	[Header("TIME")]
 	[SerializeField] GameObject timePanel;
 	[SerializeField] TextMeshProUGUI timeText;
+	[SerializeField] TextMeshProUGUI dinersText;
 	[SerializeField] GameObject skipDayPanel;
 	[Header("MAIL")]
 	[SerializeField] GameObject mailboxPanel;
@@ -34,6 +35,7 @@ public class UIController : MonoBehaviour
 	[SerializeField] Slider progressSlider;
 	[SerializeField] TMP_Text progressText;
 	TimeManager timeManager;
+	SaveManager saveManager;
 	InputManager inputManager;
 	Letter currentLetter;
 
@@ -42,14 +44,18 @@ public class UIController : MonoBehaviour
 	{
 		SetCameraPriority(sceneCam);
 		timeManager=GameManager.Instance.TimeManager;
+		saveManager=GameManager.Instance.SaveManager;
 		timeManager.OnTimeChanged+=UpdateTime;
 		timeManager.OnDayChanged+=UpdateDay;
+		saveManager.OnDinersChanged+=UpdateDiners;
 		UpdateTime();
+		UpdateDiners();
 	}
 	void OnDestroy()
 	{
 		timeManager.OnTimeChanged-=UpdateTime;
 		timeManager.OnDayChanged-=UpdateDay;
+		saveManager.OnDinersChanged-=UpdateDiners;
 	}
 
 // EVENT SUBSCRIPTION
@@ -69,10 +75,14 @@ public class UIController : MonoBehaviour
 		}
 	}
 
-// UI TIME
+// UI TIME AND DINERS
 	void UpdateTime()
 	{
 		timeText.text=$"{timeManager.GetHour():00} : {timeManager.GetMinute():00}";
+	}
+	void UpdateDiners()
+	{
+		dinersText.text=$"{saveManager.Diners}";
 	}
 	void UpdateDay()
 	{
@@ -139,14 +149,16 @@ public class UIController : MonoBehaviour
 	}
 	public void HideMailbox(bool backToPlayer=true)
 	{
-		SetCameraPriority(sceneCam);
 	// DELETES ALL CHILDREN FROM CONTENT
 		foreach(Transform child in mailboxContent)
 			Destroy(child.gameObject);
 		mailboxPanel.SetActive(false);
-		timePanel.SetActive(true);
 		if(backToPlayer)
+		{
+			timePanel.SetActive(true);
+			SetCameraPriority(sceneCam);
 			inputManager.SetPlayerState(InputManager.PlayerState.Player);
+		}
 	}
 
 // UI LETTER

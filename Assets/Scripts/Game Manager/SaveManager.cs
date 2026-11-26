@@ -10,6 +10,7 @@ using UnityEngine;
 [Serializable]
 public class SaveData
 {
+	public int diners=0;
 	public List<string> unlockedRecipes=new List<string>();
 	public List<string> recievedLetters=new List<string>();
 	public List<string> readLetters=new List<string>();
@@ -27,9 +28,13 @@ public class SaveManager : MonoBehaviour
 	List<Letter> readLetters=new List<Letter>();
 
 // GETTERS
+	public int Diners => saveData.diners;
 	public List<Recipe> UnlockedRecipes => unlockedRecipes;
 	public List<Letter> ReceivedLetters => receivedLetters;
 	public List<Letter> ReadLetters => readLetters;
+
+	// EVENTS
+	public event Action OnDinersChanged;
 
 // PATH TO SAVE DATA
 	string SavePath => Path.Combine(Application.persistentDataPath, "saveData.json");
@@ -85,7 +90,18 @@ public class SaveManager : MonoBehaviour
 		readLetters.Reverse();
 	}
 
-	// RECIPE PROGRESSION
+// DINERS PROGRESSION
+	public bool HasChangedDiners(int amount)
+	{
+		if(saveData.diners+amount<0)
+			return false;
+		saveData.diners=Mathf.Max(0, saveData.diners+amount);
+		OnDinersChanged?.Invoke();
+		SaveGame();
+		return true;
+	}
+
+// RECIPE PROGRESSION
 	public bool IsRecipeUnlocked(Recipe recipe)
 	{
 		return recipe!=null && saveData.unlockedRecipes.Contains(recipe.RecipeID);
