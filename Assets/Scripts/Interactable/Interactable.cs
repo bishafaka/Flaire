@@ -3,7 +3,7 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
 // INTERACTABLE CATEGORY
-	public enum Category { Mailbox, Door, Storage, Counter, Oven, Display }
+	public enum Category { Mailbox, Door, Storage, Counter, Oven, Display, Checkout }
 	[SerializeField] Category type;
 
 // ON INTERACT VIRTUAL METHOD
