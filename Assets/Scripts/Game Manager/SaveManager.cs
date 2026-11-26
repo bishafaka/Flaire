@@ -33,6 +33,9 @@ public class SaveManager : MonoBehaviour
 	public List<Letter> ReceivedLetters => receivedLetters;
 	public List<Letter> ReadLetters => readLetters;
 
+	// EVENTS
+	public event Action OnDinersChanged;
+
 // PATH TO SAVE DATA
 	string SavePath => Path.Combine(Application.persistentDataPath, "saveData.json");
 
@@ -93,6 +96,7 @@ public class SaveManager : MonoBehaviour
 		if(saveData.diners+amount<0)
 			return false;
 		saveData.diners=Mathf.Max(0, saveData.diners+amount);
+		OnDinersChanged?.Invoke();
 		SaveGame();
 		return true;
 	}
